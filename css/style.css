@@ -114,3 +114,6 @@ button:hover {
     background: gold;
     color: #000;
 }
+#cart-items .product {
+    margin-bottom: 20px;
+}
