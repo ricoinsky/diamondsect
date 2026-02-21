@@ -23,9 +23,9 @@ header {
 }
 
 .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    letter-spacing: 3px;
+    .logo .dot {
+    color: #c6a95d;
+}
 }
 
 nav a {
