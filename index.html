@@ -1,37 +1,255 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamondsect</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diamondsect</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-<header>
-    <div class="logo">DIAMONDSECT<span class="dot">.</span></div>
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="ternos.html">Ternos</a>
-        <a href="perfumaria.html">Perfumaria</a>
-        <a href="joias.html">Joias</a>
+  <!-- TOP BAR (igual Loops: frete/garantia/cupom/parcelamento) -->
+  <div class="topbar">
+    <div class="topbar__track">
+      <span>FRETE GRÁTIS</span>
+      <span>GARANTIA DE 30 DIAS</span>
+      <span>CUPOM DE PRIMEIRA COMPRA</span>
+      <span>PARCELE EM ATÉ 12X</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a class="logo" href="index.html">DIAMONDSECT<span class="dot">.</span></a>
+
+    <nav class="nav">
+      <a href="index.html" class="is-active">Início</a>
+      <a href="ternos.html">Ternos</a>
+      <a href="perfumaria.html">Perfumaria</a>
+      <a href="joias.html">Joias</a>
     </nav>
-</header>
 
-<section class="hero" style="background-image:url('assets/img/hero-lifestyle.jpg')">
-  <h1>O luxo não se explica.<br>Se reconhece.</h1>
-  <p>Diamondsect redefine presença, estilo e poder.</p>
-  <a href="joias.html" class="btn">Explorar Coleção</a>
-</section>
+    <div class="header__actions">
+      <a class="iconlink" href="#" title="Conta">Conta</a>
+      <a class="iconlink" href="#newsletter" title="Newsletter">E-mail</a>
+    </div>
+  </header>
 
-<section class="concept">
-    <h2>Marca Conceito</h2>
-    <p>Diamondsect nasce como símbolo de sofisticação moderna, combinando alta alfaiataria, perfumaria de assinatura e joias exclusivas.</p>
-</section>
+  <main>
+    <!-- HERO / SLIDER (estilo banners) -->
+    <section class="hero">
+      <div class="hero__slide is-active" style="background-image:url('https://images.unsplash.com/photo-1520975682071-aacbc3f4a78a?auto=format&fit=crop&w=2000&q=70');">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <p class="eyebrow">Maison digital • Brasil</p>
+          <h1>Luxo não se exibe.<br/>Se reconhece.</h1>
+          <p class="sub">Alfaiataria, fragrâncias e joias em curadoria premium.</p>
+          <div class="hero__cta">
+            <a class="btn" href="joias.html">Explorar coleção</a>
+            <a class="btn btn--ghost" href="ternos.html">Ver ternos</a>
+          </div>
+        </div>
+      </div>
 
-<footer>
-    <p>© 2026 Diamondsect. Todos os direitos reservados.</p>
-</footer>
+      <div class="hero__slide" style="background-image:url('https://images.unsplash.com/photo-1593032465171-8a2b1c3e8f6b?auto=format&fit=crop&w=2000&q=70');">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <p class="eyebrow">Diamondsect Ternos</p>
+          <h1>Presença.<br/>Estrutura. Elegância.</h1>
+          <p class="sub">Peças com corte refinado e atitude silenciosa.</p>
+          <div class="hero__cta">
+            <a class="btn" href="ternos.html">Explorar coleção</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__slide" style="background-image:url('https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=2000&q=70');">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <p class="eyebrow">Perfumaria de assinatura</p>
+          <h1>Assinatura olfativa<br/>que marca.</h1>
+          <p class="sub">Fragrâncias que traduzem personalidade.</p>
+          <div class="hero__cta">
+            <a class="btn" href="perfumaria.html">Explorar coleção</a>
+          </div>
+        </div>
+      </div>
+
+      <button class="hero__nav hero__nav--prev" aria-label="Anterior">‹</button>
+      <button class="hero__nav hero__nav--next" aria-label="Próximo">›</button>
+
+      <div class="hero__dots" aria-label="Paginação">
+        <button class="dotbtn is-active" aria-label="Slide 1"></button>
+        <button class="dotbtn" aria-label="Slide 2"></button>
+        <button class="dotbtn" aria-label="Slide 3"></button>
+      </div>
+    </section>
+
+    <!-- 3 CARDS DE CATEGORIA (igual “Explorar coleção”) -->
+    <section class="tri">
+      <a class="tile" href="ternos.html">
+        <div class="tile__img" style="background-image:url('https://images.unsplash.com/photo-1520975682071-aacbc3f4a78a?auto=format&fit=crop&w=1400&q=70')"></div>
+        <div class="tile__content">
+          <h3>TERNOS</h3>
+          <span>Explorar coleção</span>
+        </div>
+      </a>
+
+      <a class="tile" href="perfumaria.html">
+        <div class="tile__img" style="background-image:url('https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=1400&q=70')"></div>
+        <div class="tile__content">
+          <h3>PERFUMARIA</h3>
+          <span>Explorar coleção</span>
+        </div>
+      </a>
+
+      <a class="tile" href="joias.html">
+        <div class="tile__img" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1400&q=70')"></div>
+        <div class="tile__content">
+          <h3>JOIAS</h3>
+          <span>Explorar coleção</span>
+        </div>
+      </a>
+    </section>
+
+    <!-- BLOCO EDITORIAL (texto + CTA) -->
+    <section class="editorial">
+      <div class="editorial__media" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=70')"></div>
+      <div class="editorial__text">
+        <p class="eyebrow">Marca conceito</p>
+        <h2>Elegância contemporânea.</h2>
+        <p>
+          A Diamondsect une estética minimalista e curadoria premium para quem vive o luxo
+          como identidade — com peças pensadas para presença, legado e lifestyle.
+        </p>
+        <a class="btn btn--ghost" href="joias.html">Ver destaques</a>
+      </div>
+    </section>
+
+    <!-- “PRODUTOS EM DESTAQUE” (grid simples) -->
+    <section class="section">
+      <div class="section__head">
+        <h2>Destaques</h2>
+        <a class="link" href="ternos.html">Ver coleção</a>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1593032465171-8a2b1c3e8f6b?auto=format&fit=crop&w=1200&q=70')"></div>
+          <div class="card__body">
+            <h3>Terno Imperial Black</h3>
+            <p class="price">R$ 1.890,00</p>
+            <p class="meta">4 cores disponíveis</p>
+            <a class="btn btn--mini" href="ternos.html">Ver</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=1200&q=70')"></div>
+          <div class="card__body">
+            <h3>Diamond Essence</h3>
+            <p class="price">R$ 790,00</p>
+            <p class="meta">2 variações</p>
+            <a class="btn btn--mini" href="perfumaria.html">Ver</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=70')"></div>
+          <div class="card__body">
+            <h3>Anel Royal Gold</h3>
+            <p class="price">R$ 2.490,00</p>
+            <p class="meta">1 cor disponível</p>
+            <a class="btn btn--mini" href="joias.html">Ver</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=70')"></div>
+          <div class="card__body">
+            <h3>Pulseira Elite</h3>
+            <p class="price">R$ 950,00</p>
+            <p class="meta">3 variações</p>
+            <a class="btn btn--mini" href="joias.html">Ver</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER (igual Loops) -->
+    <section class="newsletter" id="newsletter">
+      <div class="newsletter__box">
+        <p class="eyebrow">Exclusividade</p>
+        <h2>Receba ofertas e lançamentos</h2>
+        <p>Cadastre seu e-mail para receber vantagens e acesso antecipado.</p>
+
+        <form class="newsletter__form" onsubmit="event.preventDefault(); alert('Cadastro enviado!');">
+          <input type="email" placeholder="Seu e-mail" required />
+          <button class="btn" type="submit">Assinar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FOOTER COMPLETO -->
+    <footer class="footer">
+      <div class="footer__grid">
+        <div>
+          <h4>Atendimento</h4>
+          <p class="muted">Seg a Sab: 08:00 às 22:00</p>
+          <p class="muted">WhatsApp: (seu número)</p>
+          <p class="muted">E-mail: contato@diamondsect.com.br</p>
+        </div>
+
+        <div>
+          <h4>Informações</h4>
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Trocas e Devoluções</a>
+          <a href="#">Termos e Condições</a>
+          <a href="#">Rastrear pedido</a>
+        </div>
+
+        <div>
+          <h4>Redes</h4>
+          <a href="#">Instagram</a>
+          <a href="#">YouTube</a>
+          <a href="#">Facebook</a>
+        </div>
+
+        <div>
+          <h4>Confiança</h4>
+          <p class="muted">Compra segura • Ambiente protegido</p>
+          <p class="muted">Pagamentos: Pix, Crédito, Débito</p>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        © 2026 Diamondsect. Todos os direitos reservados.
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // slider simples (sem biblioteca)
+    const slides = Array.from(document.querySelectorAll('.hero__slide'));
+    const prev = document.querySelector('.hero__nav--prev');
+    const next = document.querySelector('.hero__nav--next');
+    const dots = Array.from(document.querySelectorAll('.dotbtn'));
+    let i = 0;
+
+    function go(idx){
+      slides[i].classList.remove('is-active');
+      dots[i].classList.remove('is-active');
+      i = (idx + slides.length) % slides.length;
+      slides[i].classList.add('is-active');
+      dots[i].classList.add('is-active');
+    }
+
+    prev.addEventListener('click', () => go(i - 1));
+    next.addEventListener('click', () => go(i + 1));
+    dots.forEach((b, idx) => b.addEventListener('click', () => go(idx)));
+
+    setInterval(() => go(i + 1), 6500);
+  </script>
 
 </body>
 </html>
