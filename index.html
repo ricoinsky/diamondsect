@@ -1,68 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diamondsect</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
-  <div class="logo">DIAMONDSECT</div>
-  <nav>
-    <a href="#" onclick="showSection('home')">Início</a>
-    <a href="#" onclick="showSection('ternos')">Ternos</a>
-    <a href="#" onclick="showSection('perfumaria')">Perfumaria</a>
-    <a href="#" onclick="showSection('joias')">Joias</a>
-    <a href="#" onclick="showSection('carrinho')">Carrinho</a>
-  </nav>
+    <div class="logo">DIAMONDSECT</div>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="ternos.html">Ternos</a>
+        <a href="perfumaria.html">Perfumaria</a>
+        <a href="joias.html">Joias</a>
+    </nav>
 </header>
 
-<section class="hero" id="home">
-  <h1>Luxo não é opção.<br>É identidade.</h1>
+<section class="hero">
+    <h1>Elegância não é escolha. É identidade.</h1>
+    <p>Luxo, lifestyle e exclusividade em cada detalhe.</p>
+    <a href="joias.html" class="btn">Descobrir Coleção</a>
 </section>
 
-<section class="products" id="ternos" style="display:none;">
-  <h2>Ternos</h2>
-  <div id="product-list"></div>
+<section class="concept">
+    <h2>Marca Conceito</h2>
+    <p>Diamondsect nasce como símbolo de sofisticação moderna, combinando alta alfaiataria, perfumaria de assinatura e joias exclusivas.</p>
 </section>
 
-<section class="products" id="perfumaria" style="display:none;">
-  <h2>Perfumaria</h2>
-  <div id="product-list"></div>
-</section>
-
-<section class="products" id="joias" style="display:none;">
-  <h2>Joias</h2>
-  <div id="product-list"></div>
-</section>
-
-<section class="products" id="carrinho" style="display:none;">
-  <h2>Seu Carrinho</h2>
-  <div id="cart-items"></div>
-  <br>
-  <button onclick="checkout()">Finalizar Compra</button>
-</section>
-
-<script src="js/products.js"></script>
-<script src="js/cart.js"></script>
-
-<script>
-function showSection(section) {
-  const sections = ["home","ternos","perfumaria","joias","carrinho"];
-  sections.forEach(id => {
-    document.getElementById(id).style.display = "none";
-  });
-
-  document.getElementById(section).style.display = "block";
-
-  if(section !== "home" && section !== "carrinho"){
-    renderProducts(section);
-  }
-}
-</script>
+<footer>
+    <p>© 2026 Diamondsect. Todos os direitos reservados.</p>
+</footer>
 
 </body>
 </html>
