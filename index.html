@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamondsect</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
 
+<body>
+
+<header>
+  <div class="logo">DIAMONDSECT</div>
+  <nav>
+    <a href="#" onclick="showSection('home')">Início</a>
+    <a href="#" onclick="showSection('ternos')">Ternos</a>
+    <a href="#" onclick="showSection('perfumaria')">Perfumaria</a>
+    <a href="#" onclick="showSection('joias')">Joias</a>
+    <a href="#" onclick="showSection('carrinho')">Carrinho</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>Luxo não é opção.<br>É identidade.</h1>
+</section>
+
+<section class="products" id="ternos" style="display:none;">
+  <h2>Ternos</h2>
+  <div id="product-list"></div>
+</section>
+
+<section class="products" id="perfumaria" style="display:none;">
+  <h2>Perfumaria</h2>
+  <div id="product-list"></div>
+</section>
+
+<section class="products" id="joias" style="display:none;">
+  <h2>Joias</h2>
+  <div id="product-list"></div>
+</section>
+
+<section class="products" id="carrinho" style="display:none;">
+  <h2>Seu Carrinho</h2>
+  <div id="cart-items"></div>
+  <br>
+  <button onclick="checkout()">Finalizar Compra</button>
+</section>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+
+<script>
+function showSection(section) {
+  const sections = ["home","ternos","perfumaria","joias","carrinho"];
+  sections.forEach(id => {
+    document.getElementById(id).style.display = "none";
+  });
+
+  document.getElementById(section).style.display = "block";
+
+  if(section !== "home" && section !== "carrinho"){
+    renderProducts(section);
+  }
+}
+</script>
+
+</body>
+</html>
