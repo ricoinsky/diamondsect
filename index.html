@@ -197,5 +197,69 @@
   </footer>
 
   <script src="js/shop.js"></script>
+<script>
+  (function(){
+    const slidesWrap = document.getElementById("heroSlides");
+    if(!slidesWrap) return;
+
+    const slides = Array.from(slidesWrap.querySelectorAll(".hero__slide"));
+    const dotsWrap = document.getElementById("heroDots");
+    const dots = dotsWrap ? Array.from(dotsWrap.querySelectorAll(".hero__dot")) : [];
+    const btnPrev = document.getElementById("heroPrev");
+    const btnNext = document.getElementById("heroNext");
+
+    let index = 0;
+    let timer = null;
+
+    function setActive(i){
+      index = (i + slides.length) % slides.length;
+      slides.forEach((s, n) => s.classList.toggle("is-active", n === index));
+      dots.forEach((d, n) => d.classList.toggle("is-active", n === index));
+    }
+
+    function next(){ setActive(index + 1); }
+    function prev(){ setActive(index - 1); }
+
+    function start(){
+      stop();
+      timer = setInterval(next, 5000); // 5s
+    }
+    function stop(){
+      if(timer) clearInterval(timer);
+      timer = null;
+    }
+
+    btnNext && btnNext.addEventListener("click", () => { next(); start(); });
+    btnPrev && btnPrev.addEventListener("click", () => { prev(); start(); });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => { setActive(i); start(); });
+    });
+
+    // Swipe mobile
+    let startX = 0;
+    slidesWrap.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      stop();
+    }, {passive:true});
+
+    slidesWrap.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const dx = endX - startX;
+      if(Math.abs(dx) > 40){
+        dx < 0 ? next() : prev();
+      }
+      start();
+    }, {passive:true});
+
+    // Pause no hover (desktop)
+    slidesWrap.addEventListener("mouseenter", stop);
+    slidesWrap.addEventListener("mouseleave", start);
+
+    setActive(0);
+    start();
+  })();
+</script>
+  
 </body>
 </html>
