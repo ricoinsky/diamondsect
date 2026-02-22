@@ -22,32 +22,36 @@
     </div>
   </div>
 
-  <!-- HEADER -->
-  <header class="header">
-    <a class="brand" href="index.html">Diamondsect</a>
+ <header class="header">
+  <!-- ESQUERDA (busca) -->
+  <div class="header__left">
+    <form class="search" action="#" onsubmit="event.preventDefault();">
+      <input id="searchInput" type="search" placeholder="O que você está buscando?" />
+      <button type="button" title="Pesquisar">⌕</button>
+    </form>
+  </div>
 
-    <nav class="nav">
-      <a class="is-active" href="index.html">Início</a>
-      <a href="ternos.html">Ternos</a>
-      <a href="perfumaria.html">Perfumaria</a>
-      <a href="joias.html">Joias</a>
-      <a href="#suporte">Suporte</a>
-      <a href="#rastrear">Rastrear pedido</a>
-    </nav>
+  <!-- CENTRO (logo) -->
+  <a class="brand" href="index.html">Diamondsect</a>
 
-    <div class="header__right">
-      <form class="search" action="#" onsubmit="event.preventDefault();">
-        <input id="searchInput" type="search" placeholder="Pesquisar produtos..." />
-        <button type="button" title="Pesquisar">⌕</button>
-      </form>
+  <!-- DIREITA (carrinho) -->
+  <div class="header__right">
+    <a class="cartbtn" href="carrinho.html" aria-label="Meu carrinho">
+      Meu carrinho
+      <span class="cartcount">0</span>
+    </a>
+  </div>
 
-      <a class="cartbtn" href="carrinho.html">
-        Meu carrinho
-        <span class="cartcount">0</span>
-      </a>
-    </div>
-  </header>
-
+  <!-- MENU abaixo -->
+  <nav class="nav">
+    <a class="is-active" href="index.html">Início</a>
+    <a href="ternos.html">Ternos</a>
+    <a href="perfumaria.html">Perfumaria</a>
+    <a href="joias.html">Joias</a>
+    <a href="#suporte">Suporte</a>
+    <a href="#rastrear">Rastrear pedido</a>
+  </nav>
+</header>
   <!-- HERO (igual vibe Loops) -->
   <section class="hero" aria-label="Banner">
     <div class="hero__slides">
