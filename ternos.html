@@ -21,22 +21,30 @@
     </div>
   </div>
 
-  <header class="header">
-    <a class="brand" href="index.html">Diamondsect</a>
+<header class="header">
+  <a class="brand" href="index.html">Diamondsect</a>
 
-    <nav class="nav">
-      <a href="index.html">Início</a>
-      <a class="is-active" href="ternos.html">Ternos</a>
-      <a href="perfumaria.html">Perfumaria</a>
-      <a href="joias.html">Joias</a>
-      <a href="#suporte">Suporte</a>
-      <a href="#rastrear">Rastrear pedido</a>
-    </nav>
+  <nav class="nav">
+    <a href="index.html">Início</a>
+    <a class="is-active" href="ternos.html">Ternos</a>
+    <a href="perfumaria.html">Perfumaria</a>
+    <a href="joias.html">Joias</a>
+    <a href="#suporte">Suporte</a>
+    <a href="#rastrear">Rastrear pedido</a>
+  </nav>
 
-    <div class="actions">
-      <a class="linkbtn" href="index.html#suporte">Novidades</a>
-    </div>
-  </header>
+  <div class="header__right">
+    <form class="search" action="#" onsubmit="event.preventDefault();">
+      <input id="searchInput" type="search" placeholder="Pesquisar produtos..." />
+      <button type="button" title="Pesquisar">⌕</button>
+    </form>
+
+    <a class="cartbtn" href="carrinho.html">
+      Meu carrinho
+      <span class="cartcount">0</span>
+    </a>
+  </div>
+</header>
 
   <!-- BANNER -->
   <section class="hero" aria-label="Banner Ternos">
