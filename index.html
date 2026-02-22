@@ -25,21 +25,29 @@
 
   <!-- HEADER -->
   <header class="header">
-    <a class="brand" href="index.html">Diamondsect</a>
+  <a class="brand" href="index.html">Diamondsect</a>
 
-    <nav class="nav">
-      <a class="is-active" href="index.html">Início</a>
-      <a href="ternos.html">Ternos</a>
-      <a href="perfumaria.html">Perfumaria</a>
-      <a href="joias.html">Joias</a>
-      <a href="#suporte">Suporte</a>
-      <a href="#rastrear">Rastrear pedido</a>
-    </nav>
+  <nav class="nav">
+    <a class="is-active" href="index.html">Início</a>
+    <a href="ternos.html">Ternos</a>
+    <a href="perfumaria.html">Perfumaria</a>
+    <a href="joias.html">Joias</a>
+    <a href="#suporte">Suporte</a>
+    <a href="#rastrear">Rastrear pedido</a>
+  </nav>
 
-    <div class="actions">
-      <button class="linkbtn" type="button" id="openCoupon">Cupom</button>
-    </div>
-  </header>
+  <div class="header__right">
+    <form class="search" action="#" onsubmit="event.preventDefault();">
+      <input id="searchInput" type="search" placeholder="Pesquisar produtos..." />
+      <button type="button" title="Pesquisar">⌕</button>
+    </form>
+
+    <a class="cartbtn" href="carrinho.html">
+      Meu carrinho
+      <span class="cartcount">0</span>
+    </a>
+  </div>
+</header>
 
   <!-- POPUP CUPOM (estilo “assine e-mail e use o cupom”) -->
   <div class="modal" id="couponModal" aria-hidden="true">
