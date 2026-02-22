@@ -54,17 +54,53 @@
 </header>
   <!-- HERO (igual vibe Loops) -->
   <section class="hero" aria-label="Banner">
-    <div class="hero__slides">
-      <article class="hero__slide is-active" style="background-image:url('https://images.unsplash.com/photo-1520975682071-aacbc3f4a78a?auto=format&fit=crop&w=2400&q=70');">
-        <div class="hero__overlay"></div>
-        <div class="hero__content">
-          <h1>Luxo, lifestyle<br>e presença.</h1>
-          <p>Curadoria premium em ternos, perfumaria e joias.</p>
-          <a class="btn btn--light" href="joias.html">Explorar coleção</a>
-        </div>
-      </article>
+  <div class="hero__slides" id="heroSlides">
+
+    <!-- SLIDE 1 -->
+    <article class="hero__slide is-active" style="background-image:url('https://images.unsplash.com/photo-1520975682071-aacbc3f4a78a?auto=format&fit=crop&w=2400&q=75');">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1>Luxo, lifestyle<br>e presença.</h1>
+        <p>Curadoria premium em ternos, perfumaria e joias.</p>
+        <a class="btn btn--light" href="ternos.html">Explorar ternos</a>
+      </div>
+    </article>
+
+    <!-- SLIDE 2 -->
+    <article class="hero__slide" style="background-image:url('https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=2400&q=75');">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1>Perfumaria<br>de assinatura.</h1>
+        <p>Notas marcantes e acabamento premium.</p>
+        <a class="btn btn--light" href="perfumaria.html">Ver perfumaria</a>
+      </div>
+    </article>
+
+    <!-- SLIDE 3 -->
+    <article class="hero__slide" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=2400&q=75');">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1>Joias<br>que impõem.</h1>
+        <p>Detalhes que definem status com elegância.</p>
+        <a class="btn btn--light" href="joias.html">Ver joias</a>
+      </div>
+    </article>
+
+    <!-- SETAS -->
+    <div class="hero__nav" aria-hidden="false">
+      <button class="hero__btn" type="button" id="heroPrev" aria-label="Slide anterior">‹</button>
+      <button class="hero__btn" type="button" id="heroNext" aria-label="Próximo slide">›</button>
     </div>
-  </section>
+
+    <!-- DOTS -->
+    <div class="hero__dots" id="heroDots" aria-label="Navegação do slider">
+      <button class="hero__dot is-active" type="button" aria-label="Ir para slide 1"></button>
+      <button class="hero__dot" type="button" aria-label="Ir para slide 2"></button>
+      <button class="hero__dot" type="button" aria-label="Ir para slide 3"></button>
+    </div>
+
+  </div>
+</section>
 
   <!-- 3 CARDS -->
   <section class="tri">
