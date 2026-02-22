@@ -775,3 +775,24 @@ main{display:block}
     white-space:nowrap !important;
   }
 }
+
+/* ===== Header some ao descer e volta ao subir ===== */
+.header{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+  will-change: transform;
+}
+
+/* quando esconder */
+.header.is-hidden{
+  transform: translateY(-110%);
+}
+
+/* opcional: quando rolar, dar um “acabamento premium” */
+.header.is-scrolled{
+  background: rgba(0,0,0,.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
