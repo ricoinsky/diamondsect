@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
-<body>
+<body data-category="joias">
   <div class="topbar" role="region" aria-label="Avisos">
     <div class="topbar__track">
       <span>FRETE GRÁTIS | GARANTIA DE 30 DIAS</span>
@@ -22,29 +22,29 @@
   </div>
 
   <header class="header">
-  <a class="brand" href="index.html">Diamondsect</a>
+    <a class="brand" href="index.html">Diamondsect</a>
 
-  <nav class="nav">
-    <a href="index.html">Início</a>
-    <a href="ternos.html">Ternos</a>
-    <a href="perfumaria.html">Perfumaria</a>
-    <a class="is-active" href="joias.html">Joias</a>
-    <a href="#suporte">Suporte</a>
-    <a href="#rastrear">Rastrear pedido</a>
-  </nav>
+    <nav class="nav">
+      <a href="index.html">Início</a>
+      <a href="ternos.html">Ternos</a>
+      <a href="perfumaria.html">Perfumaria</a>
+      <a class="is-active" href="joias.html">Joias</a>
+      <a href="#suporte">Suporte</a>
+      <a href="#rastrear">Rastrear pedido</a>
+    </nav>
 
-  <div class="header__right">
-    <form class="search" action="#" onsubmit="event.preventDefault();">
-      <input id="searchInput" type="search" placeholder="Pesquisar produtos..." />
-      <button type="button" title="Pesquisar">⌕</button>
-    </form>
+    <div class="header__right">
+      <form class="search" action="#" onsubmit="event.preventDefault();">
+        <input id="searchInput" type="search" placeholder="Pesquisar produtos..." />
+        <button type="button" title="Pesquisar">⌕</button>
+      </form>
 
-    <a class="cartbtn" href="carrinho.html">
-      Meu carrinho
-      <span class="cartcount">0</span>
-    </a>
-  </div>
-</header>
+      <a class="cartbtn" href="carrinho.html">
+        Meu carrinho
+        <span class="cartcount">0</span>
+      </a>
+    </div>
+  </header>
 
   <section class="hero" aria-label="Banner Joias">
     <div class="hero__slides">
@@ -65,47 +65,19 @@
       <a class="link" href="index.html">Voltar</a>
     </div>
 
-    <div class="grid">
-      <article class="card">
-        <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=70')"></div>
-        <div class="card__body">
-          <h3>Anel Royal Gold</h3>
-          <p class="price">Preço promocional <strong>R$ 2.490,00</strong></p>
-          <p class="meta">1 cor disponível</p>
-          <a class="btn btn--mini" href="https://wa.me/55SEUNUMERO?text=Quero%20o%20Anel%20Royal%20Gold">Comprar</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1601121141461-9d664b7e0e71?auto=format&fit=crop&w=1200&q=70')"></div>
-        <div class="card__body">
-          <h3>Pulseira Elite</h3>
-          <p class="price">Preço promocional <strong>R$ 950,00</strong></p>
-          <p class="meta">3 variações</p>
-          <a class="btn btn--mini" href="https://wa.me/55SEUNUMERO?text=Quero%20a%20Pulseira%20Elite">Comprar</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1200&q=70')"></div>
-        <div class="card__body">
-          <h3>Colar Signature</h3>
-          <p class="price">Preço promocional <strong>R$ 1.290,00</strong></p>
-          <p class="meta">2 variações</p>
-          <a class="btn btn--mini" href="https://wa.me/55SEUNUMERO?text=Quero%20o%20Colar%20Signature">Comprar</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1617038220319-276c8b3f6de0?auto=format&fit=crop&w=1200&q=70')"></div>
-        <div class="card__body">
-          <h3>Bracelete Noir</h3>
-          <p class="price">Preço promocional <strong>R$ 1.490,00</strong></p>
-          <p class="meta">1 variação</p>
-          <a class="btn btn--mini" href="https://wa.me/55SEUNUMERO?text=Quero%20o%20Bracelete%20Noir">Comprar</a>
-        </div>
-      </article>
+    <div class="toolbar">
+      <div class="count" id="resultCount">0 item(s)</div>
+      <div class="sort">
+        <label for="sortSelect">Ordenar:</label>
+        <select id="sortSelect">
+          <option value="best">Mais vendidos</option>
+          <option value="low">Menor preço</option>
+          <option value="high">Maior preço</option>
+        </select>
+      </div>
     </div>
+
+    <div class="grid" id="shopGrid"></div>
   </section>
 
   <section class="newsletter" id="suporte">
@@ -145,5 +117,7 @@
     </div>
     <div class="footer__bottom">Diamondsect | Todos os direitos reservados.</div>
   </footer>
+
+  <script src="js/shop.js"></script>
 </body>
 </html>
