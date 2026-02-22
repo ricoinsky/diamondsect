@@ -197,70 +197,48 @@
   </footer>
 
   <script src="js/shop.js"></script>
-  
-<script>
-  (function(){
-    const slidesWrap = document.getElementById("heroSlides");
-    if(!slidesWrap) return;
+  <script>
+(function(){
+  const header = document.querySelector(".header");
+  if(!header) return;
 
-    const slides = Array.from(slidesWrap.querySelectorAll(".hero__slide"));
-    const dotsWrap = document.getElementById("heroDots");
-    const dots = dotsWrap ? Array.from(dotsWrap.querySelectorAll(".hero__dot")) : [];
-    const btnPrev = document.getElementById("heroPrev");
-    const btnNext = document.getElementById("heroNext");
+  let lastY = window.scrollY;
+  let ticking = false;
 
-    let index = 0;
-    let timer = null;
+  function onScroll(){
+    const y = window.scrollY;
 
-    function setActive(i){
-      index = (i + slides.length) % slides.length;
-      slides.forEach((s, n) => s.classList.toggle("is-active", n === index));
-      dots.forEach((d, n) => d.classList.toggle("is-active", n === index));
-    }
+    // visual premium ao rolar um pouco
+    if(y > 10) header.classList.add("is-scrolled");
+    else header.classList.remove("is-scrolled");
 
-    function next(){ setActive(index + 1); }
-    function prev(){ setActive(index - 1); }
+    // se descer -> esconde
+    // se subir -> mostra
+    const goingDown = y > lastY;
+    const goingUp = y < lastY;
 
-    function start(){
-      stop();
-      timer = setInterval(next, 5000); // 5s
-    }
-    function stop(){
-      if(timer) clearInterval(timer);
-      timer = null;
-    }
+    // tolerância pra evitar piscar
+    const diff = Math.abs(y - lastY);
 
-    btnNext && btnNext.addEventListener("click", () => { next(); start(); });
-    btnPrev && btnPrev.addEventListener("click", () => { prev(); start(); });
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => { setActive(i); start(); });
-    });
-
-    // Swipe mobile
-    let startX = 0;
-    slidesWrap.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-      stop();
-    }, {passive:true});
-
-    slidesWrap.addEventListener("touchend", (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const dx = endX - startX;
-      if(Math.abs(dx) > 40){
-        dx < 0 ? next() : prev();
+    if(diff > 8){
+      if(goingDown && y > 120){
+        header.classList.add("is-hidden");
+      } else if(goingUp){
+        header.classList.remove("is-hidden");
       }
-      start();
-    }, {passive:true});
+    }
 
-    // Pause no hover (desktop)
-    slidesWrap.addEventListener("mouseenter", stop);
-    slidesWrap.addEventListener("mouseleave", start);
+    lastY = y;
+    ticking = false;
+  }
 
-    setActive(0);
-    start();
-  })();
+  window.addEventListener("scroll", function(){
+    if(!ticking){
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+})();
 </script>
-  
 </body>
 </html>
