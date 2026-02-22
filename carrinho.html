@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diamondsect | Meu carrinho</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
 
+  <div class="topbar" role="region" aria-label="Avisos">
+    <div class="topbar__track">
+      <span>FRETE GRÁTIS | GARANTIA DE 30 DIAS</span>
+      <span>CUPOM DE PRIMEIRA COMPRA</span>
+      <span>PARCELE EM ATÉ 12X NO CARTÃO</span>
+      <span>COMPRA SEGURA</span>
+      <span>FRETE GRÁTIS | GARANTIA DE 30 DIAS</span>
+      <span>CUPOM DE PRIMEIRA COMPRA</span>
+      <span>PARCELE EM ATÉ 12X NO CARTÃO</span>
+      <span>COMPRA SEGURA</span>
+    </div>
+  </div>
+
+  <header class="header">
+    <a class="brand" href="index.html">Diamondsect</a>
+
+    <nav class="nav">
+      <a href="index.html">Início</a>
+      <a href="ternos.html">Ternos</a>
+      <a href="perfumaria.html">Perfumaria</a>
+      <a href="joias.html">Joias</a>
+    </nav>
+
+    <div class="header__right">
+      <a class="cartbtn" href="carrinho.html">
+        Meu carrinho
+        <span class="cartcount">0</span>
+      </a>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section__head">
+      <h2>Meu carrinho</h2>
+      <a class="link" href="index.html">Continuar comprando</a>
+    </div>
+
+    <div id="cartList"></div>
+
+    <div class="carttotal">
+      <div>Total</div>
+      <div id="cartTotal">R$ 0,00</div>
+    </div>
+
+    <div style="margin-top:14px;">
+      <button class="btn" type="button" onclick="alert('Pagamento entra depois (Pix/Cartão).')">Finalizar compra</button>
+    </div>
+  </section>
+
+  <script src="js/shop.js"></script>
+</body>
+</html>
