@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
-<body>
+<body data-category="perfumaria">
   <div class="topbar" role="region" aria-label="Avisos">
     <div class="topbar__track">
       <span>FRETE GRÁTIS | GARANTIA DE 30 DIAS</span>
@@ -21,30 +21,30 @@
     </div>
   </div>
 
- <header class="header">
-  <a class="brand" href="index.html">Diamondsect</a>
+  <header class="header">
+    <a class="brand" href="index.html">Diamondsect</a>
 
-  <nav class="nav">
-    <a href="index.html">Início</a>
-    <a href="ternos.html">Ternos</a>
-    <a class="is-active" href="perfumaria.html">Perfumaria</a>
-    <a href="joias.html">Joias</a>
-    <a href="#suporte">Suporte</a>
-    <a href="#rastrear">Rastrear pedido</a>
-  </nav>
+    <nav class="nav">
+      <a href="index.html">Início</a>
+      <a href="ternos.html">Ternos</a>
+      <a class="is-active" href="perfumaria.html">Perfumaria</a>
+      <a href="joias.html">Joias</a>
+      <a href="#suporte">Suporte</a>
+      <a href="#rastrear">Rastrear pedido</a>
+    </nav>
 
-  <div class="header__right">
-    <form class="search" action="#" onsubmit="event.preventDefault();">
-      <input id="searchInput" type="search" placeholder="Pesquisar produtos..." />
-      <button type="button" title="Pesquisar">⌕</button>
-    </form>
+    <div class="header__right">
+      <form class="search" action="#" onsubmit="event.preventDefault();">
+        <input id="searchInput" type="search" placeholder="Pesquisar produtos..." />
+        <button type="button" title="Pesquisar">⌕</button>
+      </form>
 
-    <a class="cartbtn" href="carrinho.html">
-      Meu carrinho
-      <span class="cartcount">0</span>
-    </a>
-  </div>
-</header>
+      <a class="cartbtn" href="carrinho.html">
+        Meu carrinho
+        <span class="cartcount">0</span>
+      </a>
+    </div>
+  </header>
 
   <section class="hero" aria-label="Banner Perfumaria">
     <div class="hero__slides">
@@ -65,47 +65,19 @@
       <a class="link" href="index.html">Voltar</a>
     </div>
 
-    <div class="grid">
-      <article class="card">
-        <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=1200&q=70')"></div>
-        <div class="card__body">
-          <h3>Diamond Essence</h3>
-          <p class="price">Preço promocional <strong>R$ 790,00</strong></p>
-          <p class="meta">2 variações</p>
-          <a class="btn btn--mini" href="https://wa.me/55SEUNUMERO?text=Quero%20o%20Perfume%20Diamond%20Essence">Comprar</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1200&q=70')"></div>
-        <div class="card__body">
-          <h3>Midnight Signature</h3>
-          <p class="price">Preço promocional <strong>R$ 890,00</strong></p>
-          <p class="meta">1 variação</p>
-          <a class="btn btn--mini" href="https://wa.me/55SEUNUMERO?text=Quero%20o%20Perfume%20Midnight%20Signature">Comprar</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1200&q=70')"></div>
-        <div class="card__body">
-          <h3>Gold Reserve</h3>
-          <p class="price">Preço promocional <strong>R$ 990,00</strong></p>
-          <p class="meta">3 variações</p>
-          <a class="btn btn--mini" href="https://wa.me/55SEUNUMERO?text=Quero%20o%20Perfume%20Gold%20Reserve">Comprar</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card__img" style="background-image:url('https://images.unsplash.com/photo-1591375372226-3531e4c4f2f7?auto=format&fit=crop&w=1200&q=70')"></div>
-        <div class="card__body">
-          <h3>Velvet Noir</h3>
-          <p class="price">Preço promocional <strong>R$ 840,00</strong></p>
-          <p class="meta">2 variações</p>
-          <a class="btn btn--mini" href="https://wa.me/55SEUNUMERO?text=Quero%20o%20Perfume%20Velvet%20Noir">Comprar</a>
-        </div>
-      </article>
+    <div class="toolbar">
+      <div class="count" id="resultCount">0 item(s)</div>
+      <div class="sort">
+        <label for="sortSelect">Ordenar:</label>
+        <select id="sortSelect">
+          <option value="best">Mais vendidos</option>
+          <option value="low">Menor preço</option>
+          <option value="high">Maior preço</option>
+        </select>
+      </div>
     </div>
+
+    <div class="grid" id="shopGrid"></div>
   </section>
 
   <section class="newsletter" id="suporte">
@@ -145,5 +117,7 @@
     </div>
     <div class="footer__bottom">Diamondsect | Todos os direitos reservados.</div>
   </footer>
+
+  <script src="js/shop.js"></script>
 </body>
 </html>
