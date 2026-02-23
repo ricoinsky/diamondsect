@@ -1,151 +1,292 @@
-// ======= Produtos (demo) =======
-// Você pode editar aqui depois (id, nome, preço, categoria, ranking de "mais vendidos")
+/* =========================
+   DIAMONDSECT — SHOP SYSTEM
+   (produtos + busca + ordenação + carrinho)
+========================= */
+
+const LS_CART_KEY = "diamondsect_cart_v1";
+
+/** Catálogo (imagens premium/realistas via Unsplash) */
 const PRODUCTS = [
-  { id: "t1", name: "Terno Imperial Black", price: 1890, category: "ternos", soldRank: 1, img: "https://images.unsplash.com/photo-1593032465171-8a2b1c3e8f6b?auto=format&fit=crop&w=1200&q=70", colors: "4 cores disponíveis" },
-  { id: "t2", name: "Smoking Midnight", price: 2490, category: "ternos", soldRank: 2, img: "https://images.unsplash.com/photo-1520975682071-aacbc3f4a78a?auto=format&fit=crop&w=1200&q=70", colors: "2 cores disponíveis" },
-  { id: "t3", name: "Terno Sand Luxury", price: 1790, category: "ternos", soldRank: 3, img: "https://images.unsplash.com/photo-1592878897400-92c8c488bd89?auto=format&fit=crop&w=1200&q=70", colors: "3 cores disponíveis" },
-  { id: "t4", name: "Terno Graphite", price: 1690, category: "ternos", soldRank: 4, img: "https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=1200&q=70", colors: "4 cores disponíveis" },
+  // TERNOS
+  {
+    id: "t001",
+    category: "ternos",
+    name: "Terno Imperial Black",
+    price: 1890.0,
+    compareAt: 2290.0,
+    soldScore: 96,
+    colors: 4,
+    image:
+      "https://images.unsplash.com/photo-1520975682071-aacbc3f4a78a?auto=format&fit=crop&w=1400&q=75",
+    badge: "Mais vendido",
+  },
+  {
+    id: "t002",
+    category: "ternos",
+    name: "Smoking Midnight",
+    price: 2490.0,
+    compareAt: 2890.0,
+    soldScore: 88,
+    colors: 2,
+    image:
+      "https://images.unsplash.com/photo-1520975958225-02f6b1d04c51?auto=format&fit=crop&w=1400&q=75",
+    badge: "Premium",
+  },
+  {
+    id: "t003",
+    category: "ternos",
+    name: "Blazer Royale Grey",
+    price: 1390.0,
+    compareAt: 1690.0,
+    soldScore: 72,
+    colors: 3,
+    image:
+      "https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1400&q=75",
+    badge: "Alfaiataria",
+  },
+  {
+    id: "t004",
+    category: "ternos",
+    name: "Terno Sand Elegance",
+    price: 1790.0,
+    compareAt: 2190.0,
+    soldScore: 64,
+    colors: 2,
+    image:
+      "https://images.unsplash.com/photo-1520975867590-0f2a0b5a0f9b?auto=format&fit=crop&w=1400&q=75",
+    badge: "Novo",
+  },
 
-  { id: "p1", name: "Diamond Essence", price: 790, category: "perfumaria", soldRank: 1, img: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=1200&q=70", colors: "2 variações" },
-  { id: "p2", name: "Midnight Signature", price: 890, category: "perfumaria", soldRank: 2, img: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1200&q=70", colors: "1 variação" },
-  { id: "p3", name: "Gold Reserve", price: 990, category: "perfumaria", soldRank: 3, img: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1200&q=70", colors: "3 variações" },
-  { id: "p4", name: "Velvet Noir", price: 840, category: "perfumaria", soldRank: 4, img: "https://images.unsplash.com/photo-1591375372226-3531e4c4f2f7?auto=format&fit=crop&w=1200&q=70", colors: "2 variações" },
+  // PERFUMARIA
+  {
+    id: "p001",
+    category: "perfumaria",
+    name: "Essência Noire",
+    price: 349.0,
+    compareAt: 449.0,
+    soldScore: 90,
+    colors: 1,
+    image:
+      "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=1400&q=75",
+    badge: "Mais vendido",
+  },
+  {
+    id: "p002",
+    category: "perfumaria",
+    name: "Signature Amber",
+    price: 399.0,
+    compareAt: 499.0,
+    soldScore: 78,
+    colors: 1,
+    image:
+      "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1400&q=75",
+    badge: "Assinatura",
+  },
+  {
+    id: "p003",
+    category: "perfumaria",
+    name: "Citrus Prestige",
+    price: 319.0,
+    compareAt: 399.0,
+    soldScore: 62,
+    colors: 1,
+    image:
+      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1400&q=75",
+    badge: "Refrescante",
+  },
 
-  { id: "j1", name: "Anel Royal Gold", price: 2490, category: "joias", soldRank: 1, img: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=70", colors: "1 cor disponível" },
-  { id: "j2", name: "Pulseira Elite", price: 950, category: "joias", soldRank: 2, img: "https://images.unsplash.com/photo-1601121141461-9d664b7e0e71?auto=format&fit=crop&w=1200&q=70", colors: "3 variações" },
-  { id: "j3", name: "Colar Signature", price: 1290, category: "joias", soldRank: 3, img: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1200&q=70", colors: "2 variações" },
-  { id: "j4", name: "Bracelete Noir", price: 1490, category: "joias", soldRank: 4, img: "https://images.unsplash.com/photo-1617038220319-276c8b3f6de0?auto=format&fit=crop&w=1200&q=70", colors: "1 variação" },
+  // JOIAS
+  {
+    id: "j001",
+    category: "joias",
+    name: "Colar Diamond Drop",
+    price: 590.0,
+    compareAt: 790.0,
+    soldScore: 86,
+    colors: 1,
+    image:
+      "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1400&q=75",
+    badge: "Premium",
+  },
+  {
+    id: "j002",
+    category: "joias",
+    name: "Anel Ouro Noir",
+    price: 690.0,
+    compareAt: 890.0,
+    soldScore: 70,
+    colors: 1,
+    image:
+      "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1400&q=75",
+    badge: "Luxo",
+  },
+  {
+    id: "j003",
+    category: "joias",
+    name: "Pulseira Atlas",
+    price: 420.0,
+    compareAt: 560.0,
+    soldScore: 58,
+    colors: 1,
+    image:
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1400&q=75",
+    badge: "Elegância",
+  },
 ];
 
-// ======= Carrinho (localStorage) =======
-const CART_KEY = "diamondsect_cart";
-
-function getCart(){
-  try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); }
-  catch { return []; }
-}
-function setCart(items){
-  localStorage.setItem(CART_KEY, JSON.stringify(items));
-  updateCartBadge();
-}
-function addToCart(productId){
-  const cart = getCart();
-  cart.push(productId);
-  setCart(cart);
-  alert("Adicionado ao carrinho!");
-}
-function removeFromCartIndex(index){
-  const cart = getCart();
-  cart.splice(index, 1);
-  setCart(cart);
-}
-function updateCartBadge(){
-  const count = getCart().length;
-  document.querySelectorAll(".cartcount").forEach(el => el.textContent = String(count));
+/* ---------- helpers ---------- */
+function moneyBRL(v) {
+  return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-// ======= Pesquisa + Ordenação + Render =======
-function normalize(s){
-  return (s || "").toString().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"");
+function readCart() {
+  try {
+    return JSON.parse(localStorage.getItem(LS_CART_KEY)) || [];
+  } catch {
+    return [];
+  }
 }
 
-function sortProducts(list, mode){
+function writeCart(cart) {
+  localStorage.setItem(LS_CART_KEY, JSON.stringify(cart));
+}
+
+function getCartCount() {
+  const cart = readCart();
+  return cart.reduce((sum, item) => sum + item.qty, 0);
+}
+
+function setCartCountUI() {
+  const count = getCartCount();
+  document.querySelectorAll(".cartcount").forEach((el) => (el.textContent = String(count)));
+}
+
+function addToCart(productId, qty = 1) {
+  const product = PRODUCTS.find((p) => p.id === productId);
+  if (!product) return;
+
+  const cart = readCart();
+  const found = cart.find((i) => i.id === productId);
+
+  if (found) found.qty += qty;
+  else cart.push({ id: productId, qty });
+
+  writeCart(cart);
+  setCartCountUI();
+
+  // feedback simples (premium sem alerta chato)
+  const btn = document.querySelector(`[data-add="${productId}"]`);
+  if (btn) {
+    const old = btn.textContent;
+    btn.textContent = "Adicionado ✓";
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = old;
+      btn.disabled = false;
+    }, 900);
+  }
+}
+
+/* ---------- render ---------- */
+function getPageCategory() {
+  // nas páginas de categoria você colocou: <body data-category="ternos">
+  const body = document.body;
+  const cat = body?.getAttribute("data-category");
+  return cat || "all"; // home = all
+}
+
+function getQueryFromSearch() {
+  const input = document.getElementById("searchInput");
+  return (input?.value || "").trim().toLowerCase();
+}
+
+function sortProducts(list, sortValue) {
   const arr = [...list];
-  if(mode === "best") arr.sort((a,b) => a.soldRank - b.soldRank);
-  if(mode === "low") arr.sort((a,b) => a.price - b.price);
-  if(mode === "high") arr.sort((a,b) => b.price - a.price);
+  if (sortValue === "low") arr.sort((a, b) => a.price - b.price);
+  else if (sortValue === "high") arr.sort((a, b) => b.price - a.price);
+  else arr.sort((a, b) => (b.soldScore || 0) - (a.soldScore || 0)); // best
   return arr;
 }
 
-function renderGrid(container, items){
-  container.innerHTML = items.map(p => `
+function filterProducts() {
+  const cat = getPageCategory();
+  const q = getQueryFromSearch();
+  const sortSel = document.getElementById("sortSelect");
+  const sortValue = sortSel?.value || "best";
+
+  let list = PRODUCTS;
+
+  if (cat !== "all") list = list.filter((p) => p.category === cat);
+
+  if (q) {
+    list = list.filter((p) => {
+      const hay = `${p.name} ${p.category} ${p.badge || ""}`.toLowerCase();
+      return hay.includes(q);
+    });
+  }
+
+  list = sortProducts(list, sortValue);
+
+  return list;
+}
+
+function productCard(p) {
+  const compare = p.compareAt && p.compareAt > p.price ? `<span class="compare">${moneyBRL(p.compareAt)}</span>` : "";
+  const colors = p.colors && p.colors > 1 ? `<div class="meta">${p.colors} cores disponíveis</div>` : `<div class="meta">&nbsp;</div>`;
+
+  return `
     <article class="card">
-      <div class="card__img" style="background-image:url('${p.img}')"></div>
+      <a class="card__img" href="#" onclick="event.preventDefault();">
+        <img src="${p.image}" alt="${p.name}" loading="lazy"/>
+        ${p.badge ? `<span class="badge">${p.badge}</span>` : ""}
+      </a>
+
       <div class="card__body">
-        <h3>${p.name}</h3>
-        <p class="price">Preço promocional <strong>R$ ${p.price.toFixed(2).replace(".", ",")}</strong></p>
-        <p class="meta">${p.colors}</p>
-        <button class="btn btn--mini" type="button" data-add="${p.id}">Adicionar</button>
+        <h3 class="card__title">${p.name}</h3>
+        <div class="price">
+          <span class="now">${moneyBRL(p.price)}</span>
+          ${compare}
+        </div>
+        ${colors}
+        <button class="btn btn--card" data-add="${p.id}" type="button">
+          Adicionar ao carrinho
+        </button>
       </div>
     </article>
-  `).join("");
+  `;
+}
 
-  container.querySelectorAll("[data-add]").forEach(btn => {
-    btn.addEventListener("click", () => addToCart(btn.getAttribute("data-add")));
+function renderGrid() {
+  const grid = document.getElementById("shopGrid");
+  if (!grid) return;
+
+  const list = filterProducts();
+  grid.innerHTML = list.map(productCard).join("");
+
+  const countEl = document.getElementById("resultCount");
+  if (countEl) countEl.textContent = `${list.length} item(s)`;
+
+  // bind buttons
+  grid.querySelectorAll("[data-add]").forEach((btn) => {
+    btn.addEventListener("click", () => addToCart(btn.getAttribute("data-add"), 1));
   });
 }
 
-function setupShopPage(){
-  updateCartBadge();
-
-  const pageCategory = document.body.getAttribute("data-category"); // ternos/perfumaria/joias
-  const grid = document.getElementById("shopGrid");
-  const countEl = document.getElementById("resultCount");
+function bindSearchAndSort() {
+  const input = document.getElementById("searchInput");
   const sortSel = document.getElementById("sortSelect");
-  const searchInput = document.getElementById("searchInput");
 
-  if(!grid) return;
-
-  function apply(){
-    const q = normalize(searchInput?.value);
-    let list = PRODUCTS.filter(p => !pageCategory || p.category === pageCategory);
-
-    if(q){
-      list = list.filter(p => normalize(p.name).includes(q));
-    }
-
-    list = sortProducts(list, sortSel?.value || "best");
-
-    renderGrid(grid, list);
-    if(countEl) countEl.textContent = `${list.length} item(s)`;
+  if (input) {
+    input.addEventListener("input", () => renderGrid());
   }
-
-  sortSel?.addEventListener("change", apply);
-  searchInput?.addEventListener("input", apply);
-
-  apply();
+  if (sortSel) {
+    sortSel.addEventListener("change", () => renderGrid());
+  }
 }
 
-// ======= Página carrinho =======
-function setupCartPage(){
-  updateCartBadge();
-
-  const listEl = document.getElementById("cartList");
-  const totalEl = document.getElementById("cartTotal");
-  if(!listEl) return;
-
-  function render(){
-    const ids = getCart();
-    const items = ids.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
-
-    listEl.innerHTML = items.map((p, idx) => `
-      <div class="cartrow">
-        <div class="cartrow__img" style="background-image:url('${p.img}')"></div>
-        <div class="cartrow__info">
-          <div class="cartrow__name">${p.name}</div>
-          <div class="cartrow__meta">${p.colors}</div>
-          <div class="cartrow__price">R$ ${p.price.toFixed(2).replace(".", ",")}</div>
-        </div>
-        <button class="btn btn--mini" type="button" data-rm="${idx}">Remover</button>
-      </div>
-    `).join("");
-
-    listEl.querySelectorAll("[data-rm]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        removeFromCartIndex(Number(btn.getAttribute("data-rm")));
-        render();
-      });
-    });
-
-    const total = items.reduce((s,p) => s + p.price, 0);
-    if(totalEl) totalEl.textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
-  }
-
-  render();
-}
-
+/* ---------- boot ---------- */
 document.addEventListener("DOMContentLoaded", () => {
-  updateCartBadge();
-  setupShopPage();
-  setupCartPage();
+  setCartCountUI();
+  bindSearchAndSort();
+  renderGrid();
 });
