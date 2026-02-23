@@ -3,103 +3,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diamondsect | Meu carrinho</title>
+  <title>Diamondsect | Carrinho</title>
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* carrinho premium (inline simples) */
+    .cart-page{ max-width:1100px; margin:40px auto; padding:0 16px; }
+    .cart-head{ display:flex; justify-content:space-between; align-items:end; gap:12px; margin-bottom:18px; }
+    .cart-head h1{ margin:0; }
+    .cart-grid{ display:grid; grid-template-columns: 1fr 360px; gap:18px; }
+    .cart-box{ border:1px solid rgba(255,255,255,.10); border-radius:18px; padding:16px; background:rgba(0,0,0,.25); }
+    .cart-row{ display:grid; grid-template-columns: 90px 1fr 120px; gap:12px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.08); align-items:center; }
+    .cart-row:last-child{ border-bottom:none; }
+    .cart-img{ width:90px; height:90px; object-fit:cover; border-radius:14px; border:1px solid rgba(255,255,255,.12); }
+    .cart-name{ font-size:16px; margin-bottom:6px; }
+    .cart-price{ color:rgba(255,255,255,.75); font-size:14px; margin-bottom:10px; }
+    .cart-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .qbtn{ width:34px; height:34px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#fff; cursor:pointer; }
+    .qty{ min-width:26px; text-align:center; }
+    .rmbtn{ border:none; background:transparent; color:rgba(255,255,255,.65); cursor:pointer; text-decoration:underline; }
+    .cart-line{ text-align:right; font-weight:600; }
+    .summary h2{ margin:0 0 10px; font-size:18px; }
+    .sum-row{ display:flex; justify-content:space-between; margin:10px 0; color:rgba(255,255,255,.85); }
+    .sum-total{ font-size:18px; font-weight:700; }
+    .payhint{ font-size:13px; color:rgba(255,255,255,.65); margin-top:10px; }
+    .cart-empty{ text-align:center; padding:40px 14px; }
+    .cart-empty p{ color:rgba(255,255,255,.75); }
+    @media(max-width: 980px){
+      .cart-grid{ grid-template-columns: 1fr; }
+      .cart-row{ grid-template-columns: 80px 1fr; }
+      .cart-line{ text-align:left; }
+    }
+  </style>
 </head>
+
 <body>
-
-  <div class="topbar" role="region" aria-label="Avisos">
-    <div class="topbar__track">
-      <span>FRETE GRÁTIS | GARANTIA DE 30 DIAS</span>
-      <span>CUPOM DE PRIMEIRA COMPRA</span>
-      <span>PARCELE EM ATÉ 12X NO CARTÃO</span>
-      <span>COMPRA SEGURA</span>
-      <span>FRETE GRÁTIS | GARANTIA DE 30 DIAS</span>
-      <span>CUPOM DE PRIMEIRA COMPRA</span>
-      <span>PARCELE EM ATÉ 12X NO CARTÃO</span>
-      <span>COMPRA SEGURA</span>
-    </div>
-  </div>
-
+  <!-- HEADER (use o mesmo das outras páginas, mantendo search + carrinho) -->
   <header class="header">
+    <div class="header__left">
+      <form class="search" action="#" onsubmit="event.preventDefault();">
+        <input id="searchInput" type="search" placeholder="O que você está buscando?" />
+        <button type="button" title="Pesquisar">⌕</button>
+      </form>
+    </div>
+
     <a class="brand" href="index.html">Diamondsect</a>
+
+    <div class="header__right">
+      <a class="cartbtn" href="carrinho.html">
+        Meu carrinho <span class="cartcount">0</span>
+      </a>
+    </div>
 
     <nav class="nav">
       <a href="index.html">Início</a>
       <a href="ternos.html">Ternos</a>
       <a href="perfumaria.html">Perfumaria</a>
       <a href="joias.html">Joias</a>
+      <a href="#suporte">Suporte</a>
+      <a href="#rastrear">Rastrear pedido</a>
     </nav>
-
-    <div class="header__right">
-      <a class="cartbtn" href="carrinho.html">
-        Meu carrinho
-        <span class="cartcount">0</span>
-      </a>
-    </div>
   </header>
 
-  <section class="section">
-    <div class="section__head">
-      <h2>Meu carrinho</h2>
+  <main class="cart-page">
+    <div class="cart-head">
+      <h1>Meu carrinho</h1>
       <a class="link" href="index.html">Continuar comprando</a>
     </div>
 
-    <div id="cartList"></div>
+    <div class="cart-grid">
+      <section class="cart-box">
+        <div id="cartWrap"></div>
+      </section>
 
-    <div class="carttotal">
-      <div>Total</div>
-      <div id="cartTotal">R$ 0,00</div>
+      <aside class="cart-box summary">
+        <h2>Resumo</h2>
+        <div class="sum-row">
+          <span>Total</span>
+          <span class="sum-total" id="cartTotal">R$ 0,00</span>
+        </div>
+
+        <button class="btn" type="button" onclick="alert('Checkout será configurado depois (Pix/Cartão). Por enquanto, carrinho está 100% funcionando.');">
+          Finalizar compra
+        </button>
+
+        <div class="payhint">
+          Pagamentos (em breve): Pix • Crédito • Débito
+        </div>
+      </aside>
     </div>
+  </main>
 
-    <div style="margin-top:14px;">
-      <button class="btn" type="button" onclick="alert('Pagamento entra depois (Pix/Cartão).')">Finalizar compra</button>
-    </div>
-  </section>
-
+  <!-- precisa do catálogo + carrinho -->
   <script src="js/shop.js"></script>
-  <script>
-(function(){
-  const header = document.querySelector(".header");
-  if(!header) return;
-
-  let lastY = window.scrollY;
-  let ticking = false;
-
-  function onScroll(){
-    const y = window.scrollY;
-
-    // visual premium ao rolar um pouco
-    if(y > 10) header.classList.add("is-scrolled");
-    else header.classList.remove("is-scrolled");
-
-    // se descer -> esconde
-    // se subir -> mostra
-    const goingDown = y > lastY;
-    const goingUp = y < lastY;
-
-    // tolerância pra evitar piscar
-    const diff = Math.abs(y - lastY);
-
-    if(diff > 8){
-      if(goingDown && y > 120){
-        header.classList.add("is-hidden");
-      } else if(goingUp){
-        header.classList.remove("is-hidden");
-      }
-    }
-
-    lastY = y;
-    ticking = false;
-  }
-
-  window.addEventListener("scroll", function(){
-    if(!ticking){
-      window.requestAnimationFrame(onScroll);
-      ticking = true;
-    }
-  }, { passive: true });
-})();
-</script>
+  <script src="js/cart.js"></script>
 </body>
 </html>
