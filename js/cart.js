@@ -156,24 +156,37 @@ function initSmartHeader(){
 // ✅ MOBILE BAR: some com carrinho vazio, e some quando o resumo estiver visível
 function initMobileBarVisibility(){
   const bar = document.querySelector(".mobile-bar");
+  if(!bar) return;
+
+  // Se não estiver no carrinho, some 100%
+  if(!document.body.classList.contains("cart-page")){
+    bar.classList.remove("is-visible");
+    return;
+  }
+
   const summary = document.querySelector(".summary");
-  if(!bar || !summary) return;
 
   function update(){
     const cart = getCart();
     const hasItems = cart.reduce((s,i)=> s + Number(i.qty||0), 0) > 0;
 
-    // carrinho vazio: nunca aparece
+    // Carrinho vazio: nunca aparece
     if(!hasItems){
       bar.classList.remove("is-visible");
       return;
     }
 
-    // se o resumo estiver aparecendo na tela, some
+    // Se o resumo não existir, por segurança esconde
+    if(!summary){
+      bar.classList.remove("is-visible");
+      return;
+    }
+
+    // Se o resumo estiver visível na tela, some (evita duplicar botão)
     const rect = summary.getBoundingClientRect();
     const summaryVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
-    // só aparece depois de rolar um pouco
+    // Só aparece depois de rolar um pouco
     const y = window.scrollY || 0;
 
     if(y > 220 && !summaryVisible){
@@ -184,6 +197,9 @@ function initMobileBarVisibility(){
   }
 
   update();
+  window.addEventListener("scroll", update, { passive:true });
+  window.addEventListener("resize", update);
+}
   window.addEventListener("scroll", update, { passive:true });
   window.addEventListener("resize", update);
 }
