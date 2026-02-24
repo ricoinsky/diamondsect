@@ -41,7 +41,6 @@ function setShip(s){ localStorage.setItem(LS_SHIP, JSON.stringify(s)); }
 function calcCouponDiscount(subtotal, coupon){
   if(!coupon) return 0;
 
-  // Cupons válidos
   if(coupon.code === "DIAMOND10") return Math.round(subtotal * 0.10);
   if(coupon.code === "DIAMOND15") return Math.round(subtotal * 0.15);
   if(coupon.code === "VIP200") return 200;
@@ -51,7 +50,7 @@ function calcCouponDiscount(subtotal, coupon){
 
 function estimateShipping(subtotalAfterDiscount, ship){
   if(!ship) return 0;
-  if(subtotalAfterDiscount >= 1500) return 0; // frete grátis acima de 1500
+  if(subtotalAfterDiscount >= 1500) return 0;
   return ship.value;
 }
 
@@ -63,8 +62,7 @@ function updateQty(id, delta){
   item.qty += delta;
 
   if(item.qty <= 0){
-    const next = cart.filter(i => Number(i.id) !== Number(id));
-    saveCart(next);
+    saveCart(cart.filter(i => Number(i.id) !== Number(id)));
   } else {
     saveCart(cart);
   }
@@ -72,8 +70,7 @@ function updateQty(id, delta){
 }
 
 function removeItem(id){
-  const cart = getCart().filter(i => Number(i.id) !== Number(id));
-  saveCart(cart);
+  saveCart(getCart().filter(i => Number(i.id) !== Number(id)));
   renderCart();
 }
 
@@ -156,7 +153,7 @@ function initSmartHeader(){
   }, { passive:true });
 }
 
-// ===== Mobile bar: aparece só com itens + some quando resumo visível =====
+// ✅ MOBILE BAR: some com carrinho vazio, e some quando o resumo estiver visível
 function initMobileBarVisibility(){
   const bar = document.querySelector(".mobile-bar");
   const summary = document.querySelector(".summary");
@@ -166,17 +163,18 @@ function initMobileBarVisibility(){
     const cart = getCart();
     const hasItems = cart.reduce((s,i)=> s + Number(i.qty||0), 0) > 0;
 
-    // se carrinho vazio, nunca mostra
+    // carrinho vazio: nunca aparece
     if(!hasItems){
       bar.classList.remove("is-visible");
       return;
     }
 
-    const y = window.scrollY || 0;
-
-    // se resumo estiver visível, some (pra não duplicar o botão)
+    // se o resumo estiver aparecendo na tela, some
     const rect = summary.getBoundingClientRect();
     const summaryVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+    // só aparece depois de rolar um pouco
+    const y = window.scrollY || 0;
 
     if(y > 220 && !summaryVisible){
       bar.classList.add("is-visible");
@@ -205,6 +203,7 @@ function renderCart(){
 
   const cart = getCart();
 
+  // catálogo não carregou
   if(!(window.PRODUCTS && window.PRODUCTS.length)){
     cartList.innerHTML = `
       <div class="empty">
@@ -223,6 +222,7 @@ function renderCart(){
     return;
   }
 
+  // carrinho vazio
   if(cart.length === 0){
     cartList.innerHTML = `
       <div class="empty">
@@ -305,7 +305,7 @@ function renderCart(){
   });
 
   renderReco();
-  initMobileBarVisibility(); // atualiza visibilidade quando muda itens
+  initMobileBarVisibility();
 }
 
 // ===== Eventos (cupom/frete/finalizar) =====
