@@ -41,8 +41,7 @@ function setShip(s){ localStorage.setItem(LS_SHIP, JSON.stringify(s)); }
 function calcCouponDiscount(subtotal, coupon){
   if(!coupon) return 0;
 
-  // Você pode mudar os cupons aqui
-  // DIAMOND10 = 10% / VIP200 = R$200
+  // Cupons válidos
   if(coupon.code === "DIAMOND10") return Math.round(subtotal * 0.10);
   if(coupon.code === "DIAMOND15") return Math.round(subtotal * 0.15);
   if(coupon.code === "VIP200") return 200;
@@ -50,12 +49,10 @@ function calcCouponDiscount(subtotal, coupon){
   return 0;
 }
 
-function estimateShipping(subtotal, ship){
+function estimateShipping(subtotalAfterDiscount, ship){
   if(!ship) return 0;
-  // frete simples “realista”: base + variação por faixa
-  // (depois você troca por API de frete real)
-  if(subtotal >= 1500) return 0; // frete grátis acima de 1500
-  return ship.value; // valor estimado salvo
+  if(subtotalAfterDiscount >= 1500) return 0; // frete grátis acima de 1500
+  return ship.value;
 }
 
 function updateQty(id, delta){
@@ -96,7 +93,6 @@ function renderReco(){
   const cartIds = new Set(getCart().map(i => Number(i.id)));
   const all = (window.PRODUCTS || []).filter(p => !cartIds.has(Number(p.id)));
 
-  // pega 6 “mais vendidos” (se tiver soldScore, senão pega os primeiros)
   const sorted = [...all].sort((a,b)=> (b.soldScore||0) - (a.soldScore||0));
   const pick = sorted.slice(0,6);
 
@@ -138,6 +134,7 @@ function initSmartHeader(){
 
   function run(){
     const y = window.scrollY;
+
     if(y > 10) header.classList.add("is-scrolled");
     else header.classList.remove("is-scrolled");
 
@@ -146,6 +143,7 @@ function initSmartHeader(){
       if(y > lastY && y > 120) header.classList.add("is-hidden");
       else if(y < lastY) header.classList.remove("is-hidden");
     }
+
     lastY = y;
     ticking = false;
   }
@@ -156,6 +154,40 @@ function initSmartHeader(){
       ticking = true;
     }
   }, { passive:true });
+}
+
+// ===== Mobile bar: aparece só com itens + some quando resumo visível =====
+function initMobileBarVisibility(){
+  const bar = document.querySelector(".mobile-bar");
+  const summary = document.querySelector(".summary");
+  if(!bar || !summary) return;
+
+  function update(){
+    const cart = getCart();
+    const hasItems = cart.reduce((s,i)=> s + Number(i.qty||0), 0) > 0;
+
+    // se carrinho vazio, nunca mostra
+    if(!hasItems){
+      bar.classList.remove("is-visible");
+      return;
+    }
+
+    const y = window.scrollY || 0;
+
+    // se resumo estiver visível, some (pra não duplicar o botão)
+    const rect = summary.getBoundingClientRect();
+    const summaryVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if(y > 220 && !summaryVisible){
+      bar.classList.add("is-visible");
+    } else {
+      bar.classList.remove("is-visible");
+    }
+  }
+
+  update();
+  window.addEventListener("scroll", update, { passive:true });
+  window.addEventListener("resize", update);
 }
 
 function renderCart(){
@@ -187,6 +219,7 @@ function renderCart(){
     subEl.textContent = moneyBRL(0);
     discEl.textContent = moneyBRL(0);
     shipEl.textContent = moneyBRL(0);
+    initMobileBarVisibility();
     return;
   }
 
@@ -205,6 +238,7 @@ function renderCart(){
     discEl.textContent = moneyBRL(0);
     shipEl.textContent = moneyBRL(0);
     renderReco();
+    initMobileBarVisibility();
     return;
   }
 
@@ -245,11 +279,9 @@ function renderCart(){
     `;
   }).join("");
 
-  // Cupom
   const coupon = getCoupon();
   const discount = calcCouponDiscount(subtotal, coupon);
 
-  // Frete
   const ship = getShip();
   const shipping = estimateShipping(subtotal - discount, ship);
 
@@ -273,6 +305,7 @@ function renderCart(){
   });
 
   renderReco();
+  initMobileBarVisibility(); // atualiza visibilidade quando muda itens
 }
 
 // ===== Eventos (cupom/frete/finalizar) =====
@@ -289,6 +322,7 @@ function initActions(){
   if(applyCouponBtn){
     applyCouponBtn.addEventListener("click", ()=>{
       const code = (couponInput?.value || "").trim().toUpperCase();
+
       if(!code){
         setCoupon(null);
         setStatus("Cupom removido");
@@ -296,7 +330,6 @@ function initActions(){
         return;
       }
 
-      // Cupons válidos
       const valid = ["DIAMOND10","DIAMOND15","VIP200"];
       if(!valid.includes(code)){
         setStatus("Cupom inválido");
@@ -317,10 +350,10 @@ function initActions(){
         return;
       }
 
-      // Estimativa simples: varia por CEP (só pra parecer real)
       const last = Number(cep.slice(-1));
-      const value = 19 + (last % 5) * 6; // 19, 25, 31, 37, 43
+      const value = 19 + (last % 5) * 6;
       setShip({ cep, value });
+
       setStatus(`Frete estimado para ${cep.slice(0,5)}-${cep.slice(5)}: ${moneyBRL(value)}`);
       renderCart();
     });
@@ -338,4 +371,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmartHeader();
   initActions();
   renderCart();
+  initMobileBarVisibility();
 });
