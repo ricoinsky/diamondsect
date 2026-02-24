@@ -1348,3 +1348,29 @@ document.addEventListener("DOMContentLoaded", () => {
   initActions();
   renderCart();
 });
+
+    /* Mobile sticky checkout bar (aparece só quando precisa) */
+.mobile-bar{
+  position:fixed;
+  left:12px; right:12px; bottom:12px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(0,0,0,.75);
+  backdrop-filter: blur(12px);
+  padding:12px;
+  display:none; /* mobile: vira display:block no media query */
+  z-index:9999;
+
+  /* animação (entra e sai) */
+  transform: translateY(140%);
+  transition: transform .25s ease;
+}
+.mobile-bar.is-visible{
+  transform: translateY(0);
+}
+
+/* garante que no mobile ela exista */
+@media (max-width: 980px){
+  .mobile-bar{display:block;}
+  body{padding-bottom:92px;} /* espaço para não tampar conteúdo */
+}
