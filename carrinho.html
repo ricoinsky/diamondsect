@@ -3,41 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diamondsect | Carrinho</title>
+  <title>Diamondsect | Meu carrinho</title>
   <link rel="stylesheet" href="css/style.css" />
-  <style>
-    /* carrinho premium (inline simples) */
-    .cart-page{ max-width:1100px; margin:40px auto; padding:0 16px; }
-    .cart-head{ display:flex; justify-content:space-between; align-items:end; gap:12px; margin-bottom:18px; }
-    .cart-head h1{ margin:0; }
-    .cart-grid{ display:grid; grid-template-columns: 1fr 360px; gap:18px; }
-    .cart-box{ border:1px solid rgba(255,255,255,.10); border-radius:18px; padding:16px; background:rgba(0,0,0,.25); }
-    .cart-row{ display:grid; grid-template-columns: 90px 1fr 120px; gap:12px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.08); align-items:center; }
-    .cart-row:last-child{ border-bottom:none; }
-    .cart-img{ width:90px; height:90px; object-fit:cover; border-radius:14px; border:1px solid rgba(255,255,255,.12); }
-    .cart-name{ font-size:16px; margin-bottom:6px; }
-    .cart-price{ color:rgba(255,255,255,.75); font-size:14px; margin-bottom:10px; }
-    .cart-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-    .qbtn{ width:34px; height:34px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#fff; cursor:pointer; }
-    .qty{ min-width:26px; text-align:center; }
-    .rmbtn{ border:none; background:transparent; color:rgba(255,255,255,.65); cursor:pointer; text-decoration:underline; }
-    .cart-line{ text-align:right; font-weight:600; }
-    .summary h2{ margin:0 0 10px; font-size:18px; }
-    .sum-row{ display:flex; justify-content:space-between; margin:10px 0; color:rgba(255,255,255,.85); }
-    .sum-total{ font-size:18px; font-weight:700; }
-    .payhint{ font-size:13px; color:rgba(255,255,255,.65); margin-top:10px; }
-    .cart-empty{ text-align:center; padding:40px 14px; }
-    .cart-empty p{ color:rgba(255,255,255,.75); }
-    @media(max-width: 980px){
-      .cart-grid{ grid-template-columns: 1fr; }
-      .cart-row{ grid-template-columns: 80px 1fr; }
-      .cart-line{ text-align:left; }
-    }
-  </style>
 </head>
 
 <body>
-  <!-- HEADER (use o mesmo das outras páginas, mantendo search + carrinho) -->
   <header class="header">
     <div class="header__left">
       <form class="search" action="#" onsubmit="event.preventDefault();">
@@ -46,7 +16,7 @@
       </form>
     </div>
 
-    <a class="brand" href="index.html">Diamondsect</a>
+    <a class="brand" href="index.html">DIAMONDSECT</a>
 
     <div class="header__right">
       <a class="cartbtn" href="carrinho.html">
@@ -65,35 +35,92 @@
   </header>
 
   <main class="cart-page">
-    <div class="cart-head">
+    <div class="cart-top">
       <h1>Meu carrinho</h1>
-      <a class="link" href="index.html">Continuar comprando</a>
+      <a href="index.html">Continuar comprando</a>
     </div>
 
-    <div class="cart-grid">
-      <section class="cart-box">
-        <div id="cartWrap"></div>
-      </section>
+    <section class="cart-layout">
+      <!-- LISTA -->
+      <div class="panel">
+        <div id="cartList" class="cart-list"></div>
 
-      <aside class="cart-box summary">
+        <div class="divider"></div>
+
+        <div class="reco-title">Você também pode gostar</div>
+        <div id="recoGrid" class="reco-grid"></div>
+      </div>
+
+      <!-- SUMMARY -->
+      <aside class="panel summary">
         <h2>Resumo</h2>
-        <div class="sum-row">
-          <span>Total</span>
-          <span class="sum-total" id="cartTotal">R$ 0,00</span>
+
+        <div class="row">
+          <span>Itens</span>
+          <span id="itemsCount">0</span>
         </div>
 
-        <button class="btn" type="button" onclick="alert('Checkout será configurado depois (Pix/Cartão). Por enquanto, carrinho está 100% funcionando.');">
-          Finalizar compra
+        <div class="row">
+          <span>Subtotal</span>
+          <span id="subTotal">R$ 0,00</span>
+        </div>
+
+        <div class="row">
+          <span>Desconto</span>
+          <span id="discountVal">R$ 0,00</span>
+        </div>
+
+        <div class="row">
+          <span>Frete</span>
+          <span id="shippingVal">R$ 0,00</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <span>Total</span>
+          <span class="total" id="cartTotal">R$ 0,00</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="small" style="margin-bottom:8px;">Cupom</div>
+        <div class="field" style="margin-bottom:12px;">
+          <input id="couponInput" type="text" placeholder="Ex: DIAMOND10" />
+          <button id="applyCouponBtn" type="button">Aplicar</button>
+        </div>
+
+        <div class="small" style="margin-bottom:8px;">Calcular frete (CEP)</div>
+        <div class="field" style="margin-bottom:12px;">
+          <input id="cepInput" inputmode="numeric" placeholder="Ex: 45600-000" />
+          <button id="calcShipBtn" type="button">Calcular</button>
+        </div>
+
+        <div id="statusPill" class="badge-ok" style="display:none;"></div>
+
+        <div style="height:12px;"></div>
+
+        <button class="btn" type="button" id="finishBtn">
+          FINALIZAR COMPRA
         </button>
 
-        <div class="payhint">
-          Pagamentos (em breve): Pix • Crédito • Débito
+        <div class="small" style="margin-top:10px;">
+          Pagamentos (em breve): Pix • Crédito • Débito<br/>
+          Frete e prazo serão calculados no checkout.
         </div>
       </aside>
-    </div>
+    </section>
   </main>
 
-  <!-- precisa do catálogo + carrinho -->
+  <!-- Mobile sticky checkout bar -->
+  <div class="mobile-bar">
+    <div class="mb-row">
+      <div class="small">Total</div>
+      <div class="mb-total" id="mobileTotal">R$ 0,00</div>
+    </div>
+    <button class="btn mb-btn" id="mobileFinishBtn">FINALIZAR COMPRA</button>
+  </div>
+
   <script src="js/shop.js"></script>
   <script src="js/cart.js"></script>
 </body>
