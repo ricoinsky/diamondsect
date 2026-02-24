@@ -34,16 +34,17 @@
     </nav>
 
     <div class="header__right">
-      <form class="search" action="#" onsubmit="event.preventDefault();">
-        <input id="searchInput" type="search" placeholder="Pesquisar produtos..." />
-        <button type="button" title="Pesquisar">⌕</button>
-      </form>
+  <form class="search search--inline" action="#" onsubmit="event.preventDefault();">
+    <span class="search__icon" aria-hidden="true">⌕</span>
+    <input id="searchInput" type="search" placeholder="O que você está buscando?" autocomplete="off" />
+    <button class="search__btn" type="button" title="Pesquisar">Buscar</button>
+  </form>
 
-      <a class="cartbtn" href="carrinho.html">
-        Meu carrinho
-        <span class="cartcount">0</span>
-      </a>
-    </div>
+  <a class="cartbtn cartbtn--premium" href="carrinho.html" aria-label="Meu carrinho">
+    <span class="cartbtn__label">Meu carrinho</span>
+    <span class="cartcount">0</span>
+  </a>
+</div>
   </header>
 
   <section class="hero" aria-label="Banner Perfumaria">
