@@ -19,11 +19,17 @@
     <a class="brand" href="index.html">DIAMONDSECT</a>
 
     <div class="header__right">
-      <a class="cartbtn" href="carrinho.html">
-        Meu carrinho <span class="cartcount">0</span>
-      </a>
-    </div>
+  <form class="search search--inline" action="#" onsubmit="event.preventDefault();">
+    <span class="search__icon" aria-hidden="true">⌕</span>
+    <input id="searchInput" type="search" placeholder="O que você está buscando?" autocomplete="off" />
+    <button class="search__btn" type="button" title="Pesquisar">Buscar</button>
+  </form>
 
+  <a class="cartbtn cartbtn--premium" href="carrinho.html" aria-label="Meu carrinho">
+    <span class="cartbtn__label">Meu carrinho</span>
+    <span class="cartcount">0</span>
+  </a>
+</div>
     <nav class="nav">
       <a href="index.html">Início</a>
       <a href="ternos.html">Ternos</a>
