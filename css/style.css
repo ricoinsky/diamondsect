@@ -1374,3 +1374,33 @@ document.addEventListener("DOMContentLoaded", () => {
   .mobile-bar{display:block;}
   body{padding-bottom:92px;} /* espaço para não tampar conteúdo */
 }
+
+    /* Mobile sticky checkout bar (SÓ no carrinho) */
+.mobile-bar{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(12px);
+  padding: 12px;
+
+  /* por padrão: escondido em TODAS as páginas */
+  display: none;
+
+  z-index: 9999;
+  transform: translateY(140%);
+  transition: transform .25s ease;
+}
+
+.mobile-bar.is-visible{
+  transform: translateY(0);
+}
+
+/* Só no carrinho (mobile) */
+@media (max-width: 980px){
+  body.cart-page{ padding-bottom: 92px; }
+  body.cart-page .mobile-bar{ display: block; }
+}
