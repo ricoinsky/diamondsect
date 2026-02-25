@@ -6,7 +6,7 @@
   <title>Diamondsect | Loja Online</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-  
+
 <body>
   <!-- TOP BAR -->
   <div class="topbar" role="region" aria-label="Avisos">
@@ -22,82 +22,90 @@
     </div>
   </div>
 
-  <!-- CENTRO (logo) -->
-  <a class="brand" href="index.html">Diamondsect</a>
+  <!-- HEADER (logo central + busca/carrinho direita) -->
+  <header class="header" role="banner">
+    <div class="header__inner">
+      <!-- ESQUERDA (vazio de propósito para centralizar a marca com grid/flex) -->
+      <div class="header__left" aria-hidden="true"></div>
 
-  <!-- DIREITA (carrinho) -->
-<div class="header__right">
-  <form class="search search--inline" action="#" onsubmit="event.preventDefault();">
-    <span class="search__icon" aria-hidden="true">⌕</span>
-    <input id="searchInput" type="search" placeholder="O que você está buscando?" autocomplete="off" />
-    <button class="search__btn" type="button" title="Pesquisar">Buscar</button>
-  </form>
+      <!-- CENTRO (logo) -->
+      <a class="brand" href="index.html" aria-label="Diamondsect (Início)">DIAMONDSECT</a>
 
-  <a class="cartbtn cartbtn--premium" href="carrinho.html" aria-label="Meu carrinho">
-    <span class="cartbtn__label">Meu carrinho</span>
-    <span class="cartcount">0</span>
-  </a>
-</div>
+      <!-- DIREITA (busca + carrinho) -->
+      <div class="header__right">
+        <form class="search search--inline" action="#" onsubmit="event.preventDefault();">
+          <span class="search__icon" aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="O que você está buscando?" autocomplete="off" />
+          <button class="search__btn" type="button" title="Pesquisar">Buscar</button>
+        </form>
 
-  <!-- MENU abaixo -->
-  <nav class="nav">
-    <a class="is-active" href="index.html">Início</a>
-    <a href="ternos.html">Ternos</a>
-    <a href="perfumaria.html">Perfumaria</a>
-    <a href="joias.html">Joias</a>
-    <a href="#suporte">Suporte</a>
-    <a href="#rastrear">Rastrear pedido</a>
-  </nav>
-</header>
+        <a class="cartbtn cartbtn--premium" href="carrinho.html" aria-label="Meu carrinho">
+          <span class="cartbtn__label">Meu carrinho</span>
+          <span class="cartcount">0</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- MENU abaixo -->
+    <nav class="nav" aria-label="Navegação principal">
+      <a class="is-active" href="index.html">Início</a>
+      <a href="ternos.html">Ternos</a>
+      <a href="perfumaria.html">Perfumaria</a>
+      <a href="joias.html">Joias</a>
+      <a href="#suporte">Suporte</a>
+      <a href="#rastrear">Rastrear pedido</a>
+    </nav>
+  </header>
+
   <!-- HERO (igual vibe Loops) -->
   <section class="hero" aria-label="Banner">
-  <div class="hero__slides" id="heroSlides">
+    <div class="hero__slides" id="heroSlides">
 
-    <!-- SLIDE 1 -->
-    <article class="hero__slide is-active" style="background-image:url('https://images.unsplash.com/photo-1520975682071-aacbc3f4a78a?auto=format&fit=crop&w=2400&q=75');">
-      <div class="hero__overlay"></div>
-      <div class="hero__content">
-        <h1>Luxo, lifestyle<br>e presença.</h1>
-        <p>Curadoria premium em ternos, perfumaria e joias.</p>
-        <a class="btn btn--light" href="ternos.html">Explorar ternos</a>
+      <!-- SLIDE 1 -->
+      <article class="hero__slide is-active" style="background-image:url('https://images.unsplash.com/photo-1520975682071-aacbc3f4a78a?auto=format&fit=crop&w=2400&q=75');">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <h1>Luxo, lifestyle<br>e presença.</h1>
+          <p>Curadoria premium em ternos, perfumaria e joias.</p>
+          <a class="btn btn--light" href="ternos.html">Explorar ternos</a>
+        </div>
+      </article>
+
+      <!-- SLIDE 2 -->
+      <article class="hero__slide" style="background-image:url('https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=2400&q=75');">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <h1>Perfumaria<br>de assinatura.</h1>
+          <p>Notas marcantes e acabamento premium.</p>
+          <a class="btn btn--light" href="perfumaria.html">Ver perfumaria</a>
+        </div>
+      </article>
+
+      <!-- SLIDE 3 -->
+      <article class="hero__slide" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=2400&q=75');">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <h1>Joias<br>que impõem.</h1>
+          <p>Detalhes que definem status com elegância.</p>
+          <a class="btn btn--light" href="joias.html">Ver joias</a>
+        </div>
+      </article>
+
+      <!-- SETAS -->
+      <div class="hero__nav" aria-hidden="false">
+        <button class="hero__btn" type="button" id="heroPrev" aria-label="Slide anterior">‹</button>
+        <button class="hero__btn" type="button" id="heroNext" aria-label="Próximo slide">›</button>
       </div>
-    </article>
 
-    <!-- SLIDE 2 -->
-    <article class="hero__slide" style="background-image:url('https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=2400&q=75');">
-      <div class="hero__overlay"></div>
-      <div class="hero__content">
-        <h1>Perfumaria<br>de assinatura.</h1>
-        <p>Notas marcantes e acabamento premium.</p>
-        <a class="btn btn--light" href="perfumaria.html">Ver perfumaria</a>
+      <!-- DOTS -->
+      <div class="hero__dots" id="heroDots" aria-label="Navegação do slider">
+        <button class="hero__dot is-active" type="button" aria-label="Ir para slide 1"></button>
+        <button class="hero__dot" type="button" aria-label="Ir para slide 2"></button>
+        <button class="hero__dot" type="button" aria-label="Ir para slide 3"></button>
       </div>
-    </article>
 
-    <!-- SLIDE 3 -->
-    <article class="hero__slide" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=2400&q=75');">
-      <div class="hero__overlay"></div>
-      <div class="hero__content">
-        <h1>Joias<br>que impõem.</h1>
-        <p>Detalhes que definem status com elegância.</p>
-        <a class="btn btn--light" href="joias.html">Ver joias</a>
-      </div>
-    </article>
-
-    <!-- SETAS -->
-    <div class="hero__nav" aria-hidden="false">
-      <button class="hero__btn" type="button" id="heroPrev" aria-label="Slide anterior">‹</button>
-      <button class="hero__btn" type="button" id="heroNext" aria-label="Próximo slide">›</button>
     </div>
-
-    <!-- DOTS -->
-    <div class="hero__dots" id="heroDots" aria-label="Navegação do slider">
-      <button class="hero__dot is-active" type="button" aria-label="Ir para slide 1"></button>
-      <button class="hero__dot" type="button" aria-label="Ir para slide 2"></button>
-      <button class="hero__dot" type="button" aria-label="Ir para slide 3"></button>
-    </div>
-
-  </div>
-</section>
+  </section>
 
   <!-- 3 CARDS -->
   <section class="tri">
@@ -126,7 +134,7 @@
     </a>
   </section>
 
-  <!-- PRODUTOS (home: mostra tudo com search + sort também) -->
+  <!-- PRODUTOS -->
   <section class="section" id="produtos">
     <div class="section__head">
       <h2>Destaques</h2>
@@ -194,48 +202,38 @@
   </footer>
 
   <script src="js/shop.js"></script>
+
   <script>
-(function(){
-  const header = document.querySelector(".header");
-  if(!header) return;
+    (function(){
+      const header = document.querySelector(".header");
+      if(!header) return;
 
-  let lastY = window.scrollY;
-  let ticking = false;
+      let lastY = window.scrollY;
+      let ticking = false;
 
-  function onScroll(){
-    const y = window.scrollY;
+      function onScroll(){
+        const y = window.scrollY;
 
-    // visual premium ao rolar um pouco
-    if(y > 10) header.classList.add("is-scrolled");
-    else header.classList.remove("is-scrolled");
+        if(y > 10) header.classList.add("is-scrolled");
+        else header.classList.remove("is-scrolled");
 
-    // se descer -> esconde
-    // se subir -> mostra
-    const goingDown = y > lastY;
-    const goingUp = y < lastY;
+        const diff = Math.abs(y - lastY);
+        if(diff > 8){
+          if(y > lastY && y > 120) header.classList.add("is-hidden");
+          else if(y < lastY) header.classList.remove("is-hidden");
+        }
 
-    // tolerância pra evitar piscar
-    const diff = Math.abs(y - lastY);
-
-    if(diff > 8){
-      if(goingDown && y > 120){
-        header.classList.add("is-hidden");
-      } else if(goingUp){
-        header.classList.remove("is-hidden");
+        lastY = y;
+        ticking = false;
       }
-    }
 
-    lastY = y;
-    ticking = false;
-  }
-
-  window.addEventListener("scroll", function(){
-    if(!ticking){
-      window.requestAnimationFrame(onScroll);
-      ticking = true;
-    }
-  }, { passive: true });
-})();
-</script>
+      window.addEventListener("scroll", function(){
+        if(!ticking){
+          window.requestAnimationFrame(onScroll);
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>
