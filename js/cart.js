@@ -1,21 +1,17 @@
-// ===== DIAMONDSECT — CART (Loja grande) =====
-
 function moneyBRL(v){
-  return v.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
+  return Number(v || 0).toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
 }
 
 function getCart(){
   return JSON.parse(localStorage.getItem("cart")) || [];
 }
-
 function saveCart(cart){
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
 }
-
 function updateCartCount(){
   const cart = getCart();
-  const total = cart.reduce((sum, item) => sum + item.qty, 0);
+  const total = cart.reduce((sum, item) => sum + (Number(item.qty)||0), 0);
   document.querySelectorAll(".cartcount").forEach(el => el.textContent = total);
 }
 
@@ -24,34 +20,28 @@ function findProduct(id){
   return list.find(p => Number(p.id) === Number(id));
 }
 
-// ===== Cupom e frete (salvos no localStorage) =====
+// ===== Cupom e frete (localStorage) =====
 const LS_COUPON = "diamondsect_coupon_v1";
 const LS_SHIP = "diamondsect_ship_v1";
 
-function getCoupon(){
-  try { return JSON.parse(localStorage.getItem(LS_COUPON)) || null; } catch { return null; }
-}
+function getCoupon(){ try { return JSON.parse(localStorage.getItem(LS_COUPON)) || null; } catch { return null; } }
 function setCoupon(c){ localStorage.setItem(LS_COUPON, JSON.stringify(c)); }
 
-function getShip(){
-  try { return JSON.parse(localStorage.getItem(LS_SHIP)) || null; } catch { return null; }
-}
+function getShip(){ try { return JSON.parse(localStorage.getItem(LS_SHIP)) || null; } catch { return null; } }
 function setShip(s){ localStorage.setItem(LS_SHIP, JSON.stringify(s)); }
 
 function calcCouponDiscount(subtotal, coupon){
   if(!coupon) return 0;
-
   if(coupon.code === "DIAMOND10") return Math.round(subtotal * 0.10);
   if(coupon.code === "DIAMOND15") return Math.round(subtotal * 0.15);
   if(coupon.code === "VIP200") return 200;
-
   return 0;
 }
 
 function estimateShipping(subtotalAfterDiscount, ship){
   if(!ship) return 0;
   if(subtotalAfterDiscount >= 1500) return 0;
-  return ship.value;
+  return Number(ship.value || 0);
 }
 
 function updateQty(id, delta){
@@ -59,13 +49,11 @@ function updateQty(id, delta){
   const item = cart.find(i => Number(i.id) === Number(id));
   if(!item) return;
 
-  item.qty += delta;
+  item.qty = Number(item.qty||0) + delta;
 
-  if(item.qty <= 0){
-    saveCart(cart.filter(i => Number(i.id) !== Number(id)));
-  } else {
-    saveCart(cart);
-  }
+  if(item.qty <= 0) saveCart(cart.filter(i => Number(i.id) !== Number(id)));
+  else saveCart(cart);
+
   renderCart();
 }
 
@@ -79,19 +67,34 @@ function setStatus(text){
   if(!pill) return;
   pill.style.display = "inline-flex";
   pill.innerHTML = `✓ ${text}`;
-  setTimeout(()=>{ pill.style.display = "none"; }, 2200);
+  clearTimeout(window.__ds_pill_t);
+  window.__ds_pill_t = setTimeout(()=>{ pill.style.display = "none"; }, 2200);
 }
 
-// ===== Recomendados =====
+// ===== Recomendados (se houver catálogo) =====
 function renderReco(){
   const grid = document.getElementById("recoGrid");
   if(!grid) return;
 
-  const cartIds = new Set(getCart().map(i => Number(i.id)));
-  const all = (window.PRODUCTS || []).filter(p => !cartIds.has(Number(p.id)));
+  const all = (window.PRODUCTS || []);
+  if(!all.length){
+    grid.innerHTML = `
+      <div class="empty" style="grid-column:1/-1;">
+        <h2>Recomendados</h2>
+        <p>Quando você cadastrar os produtos, os recomendados aparecem aqui automaticamente.</p>
+      </div>
+    `;
+    return;
+  }
 
-  const sorted = [...all].sort((a,b)=> (b.soldScore||0) - (a.soldScore||0));
-  const pick = sorted.slice(0,6);
+  const cartIds = new Set(getCart().map(i => Number(i.id)));
+  const filtered = all.filter(p => !cartIds.has(Number(p.id)));
+  const pick = filtered.slice(0,6);
+
+  if(!pick.length){
+    grid.innerHTML = `<div class="muted">Sem recomendações no momento.</div>`;
+    return;
+  }
 
   grid.innerHTML = pick.map(p => `
     <div class="reco-card">
@@ -121,7 +124,7 @@ function addOne(id){
   renderCart();
 }
 
-// ===== Header inteligente (some ao rolar) =====
+// ===== Header inteligente =====
 function initSmartHeader(){
   const header = document.querySelector(".header");
   if(!header) return;
@@ -153,12 +156,11 @@ function initSmartHeader(){
   }, { passive:true });
 }
 
-// ✅ MOBILE BAR: some com carrinho vazio, e some quando o resumo estiver visível
+// ===== Mobile bar =====
 function initMobileBarVisibility(){
   const bar = document.querySelector(".mobile-bar");
   if(!bar) return;
 
-  // Se não estiver no carrinho, some 100%
   if(!document.body.classList.contains("cart-page")){
     bar.classList.remove("is-visible");
     return;
@@ -170,36 +172,20 @@ function initMobileBarVisibility(){
     const cart = getCart();
     const hasItems = cart.reduce((s,i)=> s + Number(i.qty||0), 0) > 0;
 
-    // Carrinho vazio: nunca aparece
-    if(!hasItems){
+    if(!hasItems || !summary){
       bar.classList.remove("is-visible");
       return;
     }
 
-    // Se o resumo não existir, por segurança esconde
-    if(!summary){
-      bar.classList.remove("is-visible");
-      return;
-    }
-
-    // Se o resumo estiver visível na tela, some (evita duplicar botão)
     const rect = summary.getBoundingClientRect();
     const summaryVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
-    // Só aparece depois de rolar um pouco
     const y = window.scrollY || 0;
-
-    if(y > 220 && !summaryVisible){
-      bar.classList.add("is-visible");
-    } else {
-      bar.classList.remove("is-visible");
-    }
+    if(y > 220 && !summaryVisible) bar.classList.add("is-visible");
+    else bar.classList.remove("is-visible");
   }
 
   update();
-  window.addEventListener("scroll", update, { passive:true });
-  window.addEventListener("resize", update);
-}
   window.addEventListener("scroll", update, { passive:true });
   window.addEventListener("resize", update);
 }
@@ -218,14 +204,14 @@ function renderCart(){
   if(!cartList || !totalEl || !itemsEl || !subEl || !discEl || !shipEl) return;
 
   const cart = getCart();
+  const hasCatalog = (window.PRODUCTS && window.PRODUCTS.length);
 
-  // catálogo não carregou
-  if(!(window.PRODUCTS && window.PRODUCTS.length)){
+  if(!hasCatalog){
     cartList.innerHTML = `
       <div class="empty">
-        <h2>Catálogo não carregou</h2>
-        <p>Verifique se <b>shop.js</b> está antes de <b>cart.js</b>.</p>
-        <a class="btn" href="index.html">Voltar</a>
+        <h2>Seu catálogo ainda está vazio</h2>
+        <p>Quando você cadastrar os produtos, o carrinho vai exibir tudo certinho.</p>
+        <a class="btn btn--light" href="index.html">Voltar</a>
       </div>
     `;
     totalEl.textContent = moneyBRL(0);
@@ -234,17 +220,17 @@ function renderCart(){
     subEl.textContent = moneyBRL(0);
     discEl.textContent = moneyBRL(0);
     shipEl.textContent = moneyBRL(0);
+    renderReco();
     initMobileBarVisibility();
     return;
   }
 
-  // carrinho vazio
   if(cart.length === 0){
     cartList.innerHTML = `
       <div class="empty">
         <h2>Seu carrinho está vazio</h2>
         <p>Adicione itens premium para continuar.</p>
-        <a class="btn" href="index.html">Voltar para a loja</a>
+        <a class="btn btn--light" href="index.html">Voltar para a loja</a>
       </div>
     `;
     totalEl.textContent = moneyBRL(0);
@@ -265,8 +251,8 @@ function renderCart(){
     const p = findProduct(ci.id);
     if(!p) return "";
 
-    const qty = Number(ci.qty);
-    const price = Number(p.price);
+    const qty = Number(ci.qty||0);
+    const price = Number(p.price||0);
     const line = price * qty;
 
     subtotal += line;
@@ -379,8 +365,8 @@ function initActions(){
     alert("Checkout será configurado depois (Pix/Cartão). Por enquanto: carrinho, cupom e frete já estão funcionando.");
   }
 
-  if(finishBtn) finishBtn.addEventListener("click", finish);
-  if(mobileFinishBtn) mobileFinishBtn.addEventListener("click", finish);
+  finishBtn?.addEventListener("click", finish);
+  mobileFinishBtn?.addEventListener("click", finish);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
