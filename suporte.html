@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diamondsect | Suporte</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
+<body>
+  <div class="topbar" role="region" aria-label="Avisos">
+    <div class="topbar__track">
+      <span>FRETE GRÁTIS | GARANTIA DE 30 DIAS</span>
+      <span>CUPOM DE PRIMEIRA COMPRA</span>
+      <span>PARCELE EM ATÉ 12X NO CARTÃO</span>
+      <span>COMPRA SEGURA</span>
+      <span>FRETE GRÁTIS | GARANTIA DE 30 DIAS</span>
+      <span>CUPOM DE PRIMEIRA COMPRA</span>
+      <span>PARCELE EM ATÉ 12X NO CARTÃO</span>
+      <span>COMPRA SEGURA</span>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__left"></div>
+      <a class="brand" href="index.html">DIAMONDSECT <span>•</span></a>
+
+      <div class="header__right">
+        <form class="search search--inline" action="#" onsubmit="event.preventDefault();">
+          <span class="search__icon" aria-hidden="true">⌕</span>
+          <input type="search" placeholder="Buscar ajuda (em breve)" autocomplete="off" disabled />
+          <button class="search__btn" type="button" disabled>Buscar</button>
+        </form>
+
+        <a class="cartbtn cartbtn--premium" href="carrinho.html" aria-label="Meu carrinho">
+          <span class="cartbtn__label">Meu carrinho</span>
+          <span class="cartcount">0</span>
+        </a>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Início</a>
+      <a href="ternos.html">Ternos</a>
+      <a href="perfumaria.html">Perfumaria</a>
+      <a href="joias.html">Joias</a>
+      <a class="is-active" href="suporte.html">Suporte</a>
+      <a href="rastrear.html">Rastrear pedido</a>
+    </nav>
+  </header>
+
+  <section class="hero" aria-label="Suporte">
+    <div class="hero__slides">
+      <article class="hero__slide is-active" style="background-image:url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=2400&q=75');">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <h1>Suporte</h1>
+          <p>Atendimento premium. Rápido. Objetivo. Sem enrolação.</p>
+          <a class="btn btn--light" href="#contato">Falar com a equipe</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="contato">
+    <div class="section__head">
+      <h2>Contato</h2>
+      <a class="link" href="index.html">Voltar</a>
+    </div>
+
+    <div class="grid" style="grid-template-columns:repeat(2, minmax(0,1fr));">
+      <div class="card">
+        <div class="card__body">
+          <h3 class="card__title">WhatsApp</h3>
+          <p class="muted">Atendimento: Seg a Sáb • 08:00 às 22:00</p>
+          <p class="muted">Número: <b>(coloque seu número)</b></p>
+          <div style="height:12px"></div>
+          <a class="btn btn--light" href="#" onclick="event.preventDefault(); alert('Depois você coloca seu link do WhatsApp aqui.');">Abrir WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__body">
+          <h3 class="card__title">E-mail</h3>
+          <p class="muted">Respostas em até 24h úteis.</p>
+          <p class="muted">contato@diamondsect.com.br</p>
+          <div style="height:12px"></div>
+          <a class="btn btn--light" href="#" onclick="event.preventDefault(); alert('Depois você coloca um mailto aqui.');">Enviar e-mail</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:16px"></div>
+
+    <div class="card">
+      <div class="card__body">
+        <h3 class="card__title">Dúvidas frequentes</h3>
+        <p class="muted"><b>• Troca/Devolução:</b> em breve</p>
+        <p class="muted"><b>• Prazos:</b> em breve</p>
+        <p class="muted"><b>• Garantia:</b> 30 dias</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__grid">
+      <div>
+        <h4>Central de Atendimento</h4>
+        <p class="muted">Seg a Sáb: 08:00 às 22:00</p>
+        <p class="muted">WhatsApp: (seu número)</p>
+      </div>
+      <div>
+        <h4>Informações</h4>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Trocas e Devoluções</a>
+        <a href="#">Termos e Condições</a>
+      </div>
+      <div>
+        <h4>Suporte</h4>
+        <a href="suporte.html">Contato</a>
+        <a href="suporte.html">Central de Ajuda</a>
+      </div>
+      <div>
+        <h4>Confiança</h4>
+        <p class="muted">Compra segura</p>
+        <p class="muted">Pagamentos: em breve</p>
+      </div>
+    </div>
+    <div class="footer__bottom">Diamondsect | Todos os direitos reservados.</div>
+  </footer>
+
+  <script src="js/shop.js"></script>
+  <script>
+    (function(){
+      const header = document.querySelector(".header");
+      if(!header) return;
+      let lastY = window.scrollY, ticking=false;
+      function onScroll(){
+        const y = window.scrollY;
+        if(y>10) header.classList.add("is-scrolled"); else header.classList.remove("is-scrolled");
+        const diff = Math.abs(y-lastY);
+        if(diff>8){
+          if(y>lastY && y>120) header.classList.add("is-hidden");
+          else if(y<lastY) header.classList.remove("is-hidden");
+        }
+        lastY=y; ticking=false;
+      }
+      window.addEventListener("scroll", ()=>{
+        if(!ticking){ requestAnimationFrame(onScroll); ticking=true; }
+      }, {passive:true});
+    })();
+  </script>
+</body>
+</html>
